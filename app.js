@@ -131,7 +131,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const postForm = document.getElementById("blog-form");
     const loginMessage = document.getElementById("login-message");
