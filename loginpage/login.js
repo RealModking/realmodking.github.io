@@ -180,10 +180,10 @@ document.getElementById("login-form").addEventListener("submit", async function 
     if (loginResult.success) {
         console.log("Login successful");
         // buttonlogin.disabled = true
-        window.location.href = "../index2.html";
+        window.location.href = "../index.html";
     } else {
         console.error("Login failed: " + loginResult.error);
-        window.location.href = "../index2.html"
+        window.location.href = "../index.html"
         // buttonlogin.disabled = false
     }
 });
