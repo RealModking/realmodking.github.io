@@ -128,29 +128,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
-// Example usage during login
-document.getElementById("login-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
 
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var rememberMe = document.getElementById("remember-me").checked;
-    // var buttonlogin = document.getElementById("buttonlogin");
-
-    const loginResult = await loginUser(email, password, rememberMe);
-
-
-    
-    if (loginResult.success) {
-        console.log("Login successful");
-        // buttonlogin.disabled = true
-        window.location.href = "index2.html";
-    } else {
-        console.error("Login failed: " + loginResult.error);
-        window.location.href = "./loginpage/login.html"
-        // buttonlogin.disabled = false
-    }
-});
 
 
 
