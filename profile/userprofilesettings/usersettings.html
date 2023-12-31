@@ -1,0 +1,338 @@
+<!-- Example: settings.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User Profile</title>
+        <!-- Include your Firebase configuration and Firebase SDK scripts here -->
+        <!-- Example: -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="./usersettigns.css">
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <!-- Include your app.js script here -->
+        <!-- Example: -->
+        <!-- <script src="app.js"></script> -->
+    
+    
+        <div class="topnav" id="myTopnav">
+            <a href="/index2.html">Home</a>
+            <!-- <a href="/firends/friends.html">Friends</a> -->
+            <a href="/userlist/userlist.html">User list</a>
+            <a href="">Welcome:<div id="user-username"></div></a>
+    =
+              <!-- <div class="login-container">
+                  <form id="login-form">
+                      <label for="email">Email:</label>
+                      <input type="email" id="email" required>
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" required>
+                      <label for="remember-me">Remember Me:</label>
+                      <input type="checkbox" id="remember-me">                                
+                      <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
+                  </form>
+              </div> -->
+              
+              <!-- <div class="login-container">
+                  <form id="login-form" >
+                      <input type="email" id="email" placeholder="Email" required>
+                      <input type="password" id="password" placeholder="Password" required>
+                      <label for="remember-me">Remember Me:</label>
+                      <input type="checkbox" id="remember-me" checked>                                
+                      <button type="submit">Login</button>
+                  </form>
+                </div> -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"></i>
+              
+            </a>
+          </div>
+    </head>
+<body>
+      <h1 style="text-align:center">User Settings</h1>
+      <!-- <div class="card">
+          <div>
+                  <input type="file" id="profile-picture-input" style="display: none;" accept="image/*">
+                  <img id="profile-picture" alt="Profile Picture" style="width:30%">
+          
+          </div>
+          
+        <p><strong>Username:</strong> <span id="username"></span></p> 
+        <p><strong>Name:</strong> <span id="user-name"></span></p>
+
+        <label for="link 1">link 1 twitter</label>
+        <input type="text" id="linkTitle" placeholder="Enter the link title">
+        <input type="url" id="linkUrl" placeholder="Enter the link URL">
+        <label for="link 2">link 2 youtube</label>
+        <input type="text" id="linkTitle2" placeholder="Enter the link title">
+        <input type="url" id="linkUrl2" placeholder="Enter the link URL">
+        <label for="link 3">link 3 instagram</label>
+        <input type="text" id="linkTitle3" placeholder="Enter the link title">
+        <input type="url" id="linkUrl3" placeholder="Enter the link URL">
+          <div style="margin: 24px 0;" id="links-container">
+   
+          </div>
+          <p><button id="pbutton">Contact</button></p> -->
+
+        <!-- </div>  -->
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+        <!------ Include the above in your HEAD tag ---------->
+        
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+        <!------ Include the above in your HEAD tag ---------->
+        
+        <head>
+          <title>Bootstrap Example</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        </head>
+        
+        
+        <hr>
+        <div class="container bootstrap snippet">
+            <div class="row">
+                  <div class="col-sm-10"><h1 id="username"></h1></div>
+                <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
+            </div>
+            <div class="row">
+                  <div class="col-sm-3"><!--left col-->
+                      
+        
+              <div class="text-center">
+                <img id="profile-picture" alt="Profile Picture" style="width:30%">
+                <h6>Upload a different photo...</h6>
+                <input type="file" class="text-center center-block file-upload">
+              </div><br>
+        
+                       
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+                    <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+                  </div>
+                  <!-- <button id="pbutton" onclick="submitLink()">Submit Link</button> -->
+      
+                  
+                  <ul class="list-group">
+                    <!-- <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li> -->
+                    <!-- <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li> -->
+                    <!-- <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li> -->
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Posts: <span id="user-posts"></span></strong></span> </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong>Followers: <span id="user-Followers"></span></strong></span> </li>
+                  </ul> 
+                       
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Social Media</div>
+                    <div class="panel-body">
+                        <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+                    </div>
+                  </div>
+                  
+                </div><!--/col-3-->
+                <div class="col-sm-9">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                       <!-- <li><a data-toggle="tab" href="#messages">Menu 1</a></li> -->
+                        <!-- <li><a data-toggle="tab" href="#settings">Menu 2</a></li> -->
+                      </ul>
+        
+                      
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <hr>
+                          <form class="form" action="##" method="post" id="registrationForm">
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="first_name"><h4 id="user-name"></h4></label>
+                                      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                    <label for="last_name"><h4 id="username"></h4></label>
+                                      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="phone"><h4>Phone</h4></label>
+                                      <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  <div class="col-xs-6">
+                                     <label for="mobile"><h4>Mobile</h4></label>
+                                      <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Email</h4></label>
+                                      <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Location</h4></label>
+                                      <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                   <div class="col-xs-12">
+                                        <br>
+                                          <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                           <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                    </div>
+                              </div>
+                          </form>
+                      
+                      <hr>
+                      
+                     </div><!--/tab-pane-->
+                     <div class="tab-pane" id="messages">
+                       
+                       <h2></h2>
+                       
+                       <hr>
+                          <form class="form" action="##" method="post" id="registrationForm">
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="first_name"><h4>First name</h4></label>
+                                      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                    <label for="last_name"><h4>Last name</h4></label>
+                                      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="phone"><h4>Phone</h4></label>
+                                      <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  <div class="col-xs-6">
+                                     <label for="mobile"><h4>Mobile</h4></label>
+                                      <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Email</h4></label>
+                                      <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Location</h4></label>
+                                      <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                   <div class="col-xs-12">
+                                        <br>
+                                          <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                           <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                    </div>
+                              </div>
+                          </form>
+                       
+                     </div><!--/tab-pane-->
+                     <div class="tab-pane" id="settings">
+                            
+                           
+                          <hr>
+                          <form class="form" action="##" method="post" id="registrationForm">
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="first_name"><h4>First name</h4></label>
+                                      <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                    <label for="last_name"><h4>Last name</h4></label>
+                                      <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="phone"><h4>Phone</h4></label>
+                                      <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                  </div>
+                              </div>
+                  
+                              <div class="form-group">
+                                  <div class="col-xs-6">
+                                     <label for="mobile"><h4>Mobile</h4></label>
+                                      <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Email</h4></label>
+                                      <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  
+                                  <div class="col-xs-6">
+                                      <label for="email"><h4>Location</h4></label>
+                                      <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                   <div class="col-xs-12">
+                                        <br>
+                                          <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                           <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
+                                    </div>
+                              </div>
+                          </form>
+                      </div>
+                       
+                      </div><!--/tab-pane-->
+                  </div><!--/tab-content-->
+        
+                </div><!--/col-9-->
+            </div><!--/row-->
+                                                              
+    <script>
+        function goBack() {
+            // Navigate back to the main page
+            window.history.back();
+        }
+    </script>
+    <script src="./usersettings.js"></script>
+</body>
+</html>

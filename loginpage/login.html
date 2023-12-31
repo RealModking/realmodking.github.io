@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./login.css">
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <!-- Add your Firebase configuration here -->
+    <!-- Add styles if needed -->
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+    </style> -->
+</head>
+<body>
+    <h2>Login Page</h2>
+    <!-- Email/Password Login -->
+    <!-- <form id="emailPasswordForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Login with Email/Password</button>
+    </form> -->
+
+
+
+        <div class="container">
+            <div class="form-container sign-up-container" id="signup">
+                <form action="#" method="post">
+                    <h1>Create Account</h1>
+                    <input id="signup-name" type="name" placeholder="Name" />
+                    <input id="signup-username" type="text" placeholder="Username" />
+                    <input id="signup-email" type="email" placeholder="Email" />
+                    <input id="signup-password" type="password" placeholder="Password" />
+                    <button>Sign Up</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container" id="login-form">
+                <form action="#" method="post">
+                    <h1>Sign in</h1>
+                    <input id="email" type="email" placeholder="Email" />
+                    <input id="password" type="password" placeholder="Password" />
+                    <!-- <label for="remember-me">Remember Me: <input type="checkbox" id="remember-me"></label>                     -->
+                    <p hidden>Stay logged in?</p><input id="remember-me" type="checkbox" tabindex="0" name="loggedin" checked hidden></a>
+                    <a href="#">Forgot your password?</a>
+                    <button>Sign In</button>
+                </form>
+            </div>
+        </div>
+        <script src="./login.js"></script>
+  
+    
+    <!-- Display user info -->
+    <!-- <div id="userInfo"></div> -->
+
+    <!-- Add your scripts -->
+    <!-- <script src="login.js"></script> -->
+</body>
+</html>

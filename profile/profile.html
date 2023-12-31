@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="username">User Profile:</title>
+  <!-- Include your Firebase configuration and Firebase SDK scripts here -->
+  <!-- Example: -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="./profile.css">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <!-- Include your app.js script here -->
+
+  <!-- <script src="app.js"></script> -->
+
+
+  <div class="topnav" id="myTopnav">
+    <a href="/index2.html">Home</a>
+    <!-- <a href="/firends/friends.html">Friends</a> -->
+    <a href="/userlist/userlist.html">User list</a>
+    <a href="">Welcome:<div id="user-username"></div></a>
+
+    <!-- <div class="login-container">
+              <form id="login-form">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" required>
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" required>
+                  <label for="remember-me">Remember Me:</label>
+                  <input type="checkbox" id="remember-me">                                
+                  <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
+              </form>
+          </div> -->
+
+    <!-- <div class="login-container">
+      <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <label for="remember-me">Remember Me:</label>
+        <input type="checkbox" id="remember-me" checked>
+        <button type="submit">Login</button>
+      </form>
+    </div> -->
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+
+    </a>
+  </div>
+</head>
+
+<body class="backcolor">
+  <!-- <h1>User Profile</h1> -->
+  <div>
+    <!-- <p><strong>Username:</strong> <span id="username"></span></p> -->
+    <!-- <p><strong>Name:</strong> <span id="user-name"></span></p> -->
+    <!-- <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>User Id:</strong> <span id="user-id"></span></p>
+        <p><strong>Rank:</strong> <span id="user-rank"></span></p> -->
+    <!-- Add more details as needed -->
+  </div>
+  <h1 style="text-align:center">User Profile</h1>
+  <div class="card">
+    <div>
+      <input type="file" id="profile-picture-input" style="display: none;" accept="image/*">
+      <img id="profile-picture" alt="Profile Picture" style="width:30%">
+
+    </div>
+
+    <p><strong>Username:</strong> <span id="uusername"></span></p>
+    <p><strong>Name:</strong> <span id="user-name"></span></p>
+    <p><strong>Email: the user email is hidden</strong> <span id="user-email" hidden></span></p>
+    <p><strong>User Id: the user id is hidden</strong> <span id="user-id" hidden></span></p>
+    <p><strong>Rank:</strong> <span id="user-rank"></span></p>
+    <p><strong>Title:</strong> <span id="user-title"></span></p>
+    <p><strong>Friends: <span id="friend-counter"></span></strong></p>
+    <p><strong>posts: <span id="user-posts"></span></strong></p>
+
+    <div style="margin: 24px 0;" id="links">
+
+    </div>
+
+
+
+
+
+    <!-- <p><button id="pbutton">Contact</button></p> -->
+    <p><button id="settings-button" disabled>Edit settings</button></p>
+    <p><button id="submit-a-post"disabled >Submit A post</button></p>
+  </div>
+  <div class="profile_leftcol">
+
+  </div>
+
+
+
+
+  <script src="/profile/profile.js"></script>
+</body>
+
+</html>

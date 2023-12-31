@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html class=" responsive" lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#171a21">
+    <title>Steam Community :: K3chow2</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/shared/css/motiva_sans.css?v=GfSjbGKcNYaQ&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/shared/css/buttons.css?v=tuNiaSwXwcYT&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/shared/css/shared_global.css?v=pkUhjremcPR9&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/css/globalv2.css?v=RL7hpFRFPE4A&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/css/skin_1/modalContent.css?v=.TP5s6TzX6LLh&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/css/skin_1/profilev2.css?v=YhS3xwj-8Y2Q&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/shared/css/motiva_sans.css?v=GfSjbGKcNYaQ&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/css/promo/summer2017/stickers.css?v=bZKSp7oNwVPK&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/shared/css/shared_responsive.css?v=KrKRjQbCfNh0&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+    <link
+        href="https://community.cloudflare.steamstatic.com/public/css/skin_1/header.css?v=vh4BMeDcNiCU&amp;l=english&amp;_cdn=cloudflare"
+        rel="stylesheet" type="text/css">
+
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/javascript/prototype-1.7.js?v=.55t44gwuwgvw&amp;_cdn=cloudflare"></script>
+    <script
+        type="text/javascript">VALVE_PUBLIC_PATH = "https:\/\/community.cloudflare.steamstatic.com\/public\/";</script>
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/javascript/scriptaculous/_combined.js?v=OeNIgrpEF8tL&amp;l=english&amp;_cdn=cloudflare&amp;load=effects,controls,slider,dragdrop"></script>
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/javascript/global.js?v=hNq2cd_ztz0I&amp;l=english&amp;_cdn=cloudflare"></script>
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/javascript/jquery-1.11.1.min.js?v=.isFTSRckeNhC&amp;_cdn=cloudflare"></script>
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/shared/javascript/tooltip.js?v=.zYHOpI1L3Rt0&amp;_cdn=cloudflare"></script>
+    <script type="text/javascript"
+        src="https://community.cloudflare.steamstatic.com/public/shared/javascript/shared_global.js?v=-UGZ9nnbmZVQ&amp;l=english&amp;_cdn=cloudflare"></script>
+
+
+    <meta name="twitter:card" content="summary">
+    <meta name="Description" content="No information given.">
+
+    <meta name="twitter:site" content="@steam" />
+
+    <meta property="og:title" content="Steam Community :: K3chow2">
+    <meta property="twitter:title" content="Steam Community :: K3chow2">
+    <meta property="og:type" content="website">
+    <meta property="fb:app_id" content="105386699540688">
+    <meta property="og:description" content="No information given.">
+    <meta property="twitter:description" content="No information given.">
+
+
+    <link rel="image_src"
+        href="https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8_full.jpg">
+    <meta property="og:image"
+        content="https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8_full.jpg">
+    <meta name="twitter:image"
+        content="https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8_full.jpg" />
+
+
+
+
+
+</head>
+
+<body class="flat_page profile_page has_profile_background GameProfileTheme responsive_page ">
+
+
+    <div class="responsive_page_frame with_header">
+        <div role="navigation" class="responsive_page_menu_ctn mainmenu" aria-label="Mobile Menu">
+            <div class="responsive_page_menu" id="responsive_page_menu">
+                <div class="mainmenu_contents">
+                    <div class="mainmenu_contents_items">
+                        <!-- profile area -->
+                        <div class="responsive_menu_user_area">
+                            <div class="responsive_menu_user_persona persona offline">
+                                <div class="playerAvatar offline">
+                                    <a href="https://steamcommunity.com/id/k3chow2/" aria-label="View your profile">
+                                        <img src="https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8.jpg"
+                                            srcset="https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8.jpg 1x, https://avatars.cloudflare.steamstatic.com/92d5e609a28fbbee45deaf4cadbcd3d29f2847e8_medium.jpg 2x"
+                                            alt="K3chow2"> </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                    <div class="mainmenu_footer_spacer  "></div>
+                    <div class="mainmenu_footer">
+                        <div class="mainmenu_footer_logo"><img
+                                src="https://community.cloudflare.steamstatic.com/public/shared/images/responsive/logo_valve_footer.png">
+                        </div>
+                        © Valve Corporation. All rights reserved. All trademarks are property of their respective owners
+                        in the US and other countries. <span class="mainmenu_valve_links">
+                            <a href="https://store.steampowered.com/privacy_agreement/" target="_blank">Privacy
+                                Policy</a>
+                            &nbsp;| &nbsp;<a href="http://www.valvesoftware.com/legal.htm" target="_blank">Legal</a>
+                            &nbsp;| &nbsp;<a href="https://store.steampowered.com/subscriber_agreement/"
+                                target="_blank">Steam Subscriber Agreement</a>
+                            &nbsp;| &nbsp;<a href="https://store.steampowered.com/steam_refunds/"
+                                target="_blank">Refunds</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="responsive_local_menu_tab"></div>
+
+        <div class="responsive_page_menu_ctn localmenu">
+            <div class="responsive_page_menu" id="responsive_page_local_menu"
+                data-panel="{&quot;onOptionsActionDescription&quot;:&quot;#filter_toggle&quot;,&quot;onOptionsButton&quot;:&quot;Responsive_ToggleLocalMenu()&quot;,&quot;onCancelButton&quot;:&quot;Responsive_ToggleLocalMenu()&quot;}">
+                <div class="localmenu_content"
+                    data-panel="{&quot;maintainY&quot;:true,&quot;bFocusRingRoot&quot;:true,&quot;flow-children&quot;:&quot;column&quot;}">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="responsive_header">
+            <div class="responsive_header_content">
+                <div id="responsive_menu_logo">
+                    <img src="https://community.cloudflare.steamstatic.com/public/shared/images/responsive/header_menu_hamburger.png"
+                        height="100%">
+                    <div class="responsive_header_notification_badge_ctn">
+                        <div
+                            class="responsive_header_notification_badge notification_count_total_ctn has_notifications">
+                            <span class="notification_count">4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="responsive_header_logo">
+                    <a href="https://store.steampowered.com/">
+                        <img src="https://community.cloudflare.steamstatic.com/public/shared/images/responsive/header_logo.png"
+                            height="36" border="0" alt="STEAM">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="responsive_page_content_overlay">
+
+        </div>
+
+        <div class="responsive_fixonscroll_ctn nonresponsive_hidden ">
+        </div>
+
+        <div class="responsive_page_content">
+
+            <div role="banner" id="global_header" data-panel="{&quot;flow-children&quot;:&quot;row&quot;}">
+                <div class="content">
+                    <div class="logo">
+                        <span id="logo_holder">
+                            <a href="https://store.steampowered.com/" aria-label="Link to the Steam Homepage">
+                                <img src="https://community.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
+                                    width="176" height="44" alt="Link to the Steam Homepage">
+                            </a>
+                        </span>
+                    </div>
+
+                    <div role="navigation" class="supernav_container" aria-label="Global Menu">
+                        <a class="menuitem supernav " href="/index2.html"
+                            data-tooltip-type="selector" data-tooltip-content=".submenu_store">
+                            Home </a>
+
+
+
+                        <a class="menuitem supernav " style="display: block" href="https://steamcommunity.com/"
+                            data-tooltip-type="selector" data-tooltip-content=".submenu_community">
+                            COMMUNITY </a>
+                         
+                            <!-- <button id="signOutBtn" onclick="signOut()">Sign Out</button> -->
+
+                        <a class="menuitem supernav username persona_name_text_content supernav_active"
+                            href="https://steamcommunity.com/id/k3chow2/home/" data-tooltip-type="selector"
+                            data-tooltip-content=".submenu_username">
+                            K3chow2 </a>
+
+
+                        <a class="menuitem" href="https://steamcommunity.com/chat/">
+                            Chat </a>
+
+                        <a class="menuitem" href="https://help.steampowered.com/en/">
+                            SUPPORT </a>
+                    </div>
+                </div>
+
+                <style>
+                    body.GameProfileTheme {
+                        --gradient-right: rgba(255, 255, 255, 0);
+                        --gradient-left: rgba(255, 255, 255, 0);
+                        --gradient-background: rgba(255, 255, 255, 0);
+                        --gradient-background-right: rgba(255, 255, 255, 0);
+                        --gradient-background-left: rgba(255, 255, 255, 0);
+                        --color-showcase-header: rgba(255, 255, 255, 0);
+                        --gradient-showcase-header-left: rgba(255, 255, 255, 0);
+                        --btn-background: rgba(0, 0, 0, .2);
+                        --btn-background-hover: rgb(255, 255, 255, .1);
+                        --btn-outline: rgb(255, 255, 255, .1);
+                    }
+                </style>
+
+
+                <div class="no_header profile_page has_profile_background">
+
+                    <div class="profile_animated_background">
+                        <video playsinline autoplay muted loop
+                            poster="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/534380/1d4f53cf175da017b530576c4bb9d43a4d7d3846.jpg">
+                            <source
+                                src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/534380/e76ebccd8eb5040eeeefc12a0237f34a42e39df2.webm"
+                                type="video/webm">
+                            <source
+                                src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/534380/2bc8f88d270c12075dbe53a6cd3cc6f2c0a9c94e.mp4"
+                                type="video/mp4">
+                        </video>
+                    </div>
+
+
+
+                    <div class="profile_header_bg">
+
+                        <div class="profile_header_bg_texture">
+
+                            <div class="profile_header">
+
+
+                                <div class="profile_header_content">
+                                    <div class="profile_header_centered_persona">
+                                        <div class="persona_name" style="font-size: 24px;">
+                                            <span class="actual_persona_name" id="user-name">Loading username...</span>
+
+                                            <div id="NamePopup" class="popup_block_new" style="display: none;">
+                                                <div class="popup_body popup_menu">
+                                                    <div>This user has also playedtest as:</div>
+                                                    <div id="NamePopupAliases">
+
+                                                    </div>
+                                                    <div style="display:none" id="NamePopupClearAliases">
+                                                        <a href="javascript:ShowClearAliasDialog()">Clear previous
+                                                            aliases</a>
+                                                    </div>
+                                                    <div style="clear:both"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="header_real_name ellipsis">
+                                            <bdi></bdi>
+                                            <img class="profile_flag"
+                                                src="https://community.cloudflare.steamstatic.com/public/images/countryflags/gb.gif">
+                                            United Kingdom (Great Britain)
+                                        </div>
+                                    </div>
+
+                                    <div class="playerAvatar profile_header_size offline" data-miniprofile="392925647">
+                                        <div class="playerAvatarAutoSizeInner">
+                                            <div class="profile_avatar_frame">
+                                                <img
+                                                    src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/1263950/175875a819256fdeb4a2f4bf1b124afba6c3e2e3.png">
+                                            </div>
+                                            <div class="card">
+                                                <input type="file" id="profile-picture-input" style="display: none;" accept="image/*">
+                                                <img id="profile-picture" alt="Profile Picture"  title="Profile Picture">
+                                        
+                                        </div>
+                                            <!-- <img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/items/534380/4e83098a3c1837549749ef4b347f02e8c979968f.gif"> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="profile_header_badgeinfo">
+                                        <div class="profile_header_badgeinfo_badge_area">
+                                            <a data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                                class="persona_level_btn"
+                                                href="https://steamcommunity.com/id/k3chow2/badges">
+                                                <!-- <div class="persona_name persona_level">Level <div
+                                                        class="friendPlayerLevel lvl_0"><span
+                                                            class="friendPlayerLevelNum">900</span></div>
+                                                </div> -->
+                                            </a>
+                                            <!-- <div class="profile_header_badge">
+                                                <a href="https://steamcommunity.com/id/k3chow2/badges/1"
+                                                    class="favorite_badge">
+                                                    <div class="favorite_badge_icon" data-tooltip-html="Years of Service<br>
+Member since 23 December, 2016.">
+                                                        <img src="https://community.cloudflare.steamstatic.com/public/images/badges/02_years/steamyears6_54.png"
+                                                            class="badge_icon small">
+                                                    </div>
+                                                    <div class="favorite_badge_description">
+                                                        <div class="name ellipsis">Years of Service</div>
+                                                        <div class="xp">300 XP</div>
+                                                    </div>
+                                                </a>
+                                            </div> -->
+                                        </div>
+                                        <!-- <div class="profile_header_actions">
+                                            <a class="btn_profile_action btn_medium"
+                                                href="https://steamcommunity.com/id/k3chow2/edit/info">
+                                                <span>Edit Profile</span>
+                                            </a>
+                                        </div> -->
+                                    </div>
+
+                                    <div class="profile_header_summary">
+                                        <div class="persona_name persona_name_spacer" style="font-size: 24px;">
+                                            <span class="actual_persona_name">&nbsp;</span>
+                                        </div>
+                                        <div class="header_real_name_spacer">&nbsp;</div>
+                                        <div class="profile_summary">
+                                            No information given. </div>
+                                        <!-- <div class="profile_summary_footer">
+                                            <span
+                                                data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                                class="whiteLink" class="whiteLink">View more info</span>
+                                        </div> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile_content has_profile_background">
+                        <div class="profile_content_inner">
+                            <div class="profile_rightcol">
+                                <div class="responsive_status_info">
+                                    <div class="profile_in_game persona offline">
+                                        <div class="profile_in_game_header">Currently Online</div>
+                                        <div class="profile_in_game_name">Last Online 3 mins ago</div>
+                                    </div>
+                                    <div class="profile_ban_status">
+                                        <div class="profile_ban">
+                                            1 VAC ban on record <span class="profile_ban_info">| <a class="whiteLink"
+                                                    href="https://support.steampowered.com/kb_article.php?ref=7849-Radz-6869&l=english"
+                                                    target="_blank" rel="">Info</a></span>
+                                        </div>
+                                        2506 day(s) since last ban <div><a class="whiteLink"
+                                                href="https://help.steampowered.com/en/wizard/VacBans">View Ban
+                                                History</a></div>
+                                    </div>
+                                </div>
+
+                                <div class="responsive_count_link_area">
+
+
+                                    <div data-panel="{&quot;maintainX&quot;:true,&quot;bFocusRingRoot&quot;:true,&quot;flow-children&quot;:&quot;row&quot;}"
+                                        class="profile_badges">
+                                        <div class="profile_count_link_preview_ctn"
+                                            data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}">
+                                            <div data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                                class="profile_count_link ellipsis">
+                                                <a href="https://steamcommunity.com/id/k3chow2/badges/">
+                                                    <span class="count_link_label">Badges</span>&nbsp;
+                                                    <span class="profile_count_link_total">5 </span>
+                                                </a>
+                                            </div>
+                                            <div class="profile_count_link_preview">
+                                                <div class="profile_badges_badge "
+                                                    data-tooltip-html="Pillar of Community&lt;br&gt;20 of 28 tasks completed. Complete one more Steam Community tasks to earn the Level 2 badge.">
+                                                    <a href="https://steamcommunity.com/id/k3chow2/badges/2">
+                                                        <img src="https://community.cloudflare.steamstatic.com/public/images/badges/01_community/community02_54.png"
+                                                            class="badge_icon small">
+                                                    </a>
+                                                </div>
+                                                <div style="clear: left;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div data-panel="{&quot;maintainX&quot;:true,&quot;bFocusRingRoot&quot;:true,&quot;flow-children&quot;:&quot;row&quot;}"
+                                        id="responsive_groupfriends_element_ctn">
+                                    </div>
+
+                                    <div data-panel="{&quot;maintainX&quot;:true,&quot;bFocusRingRoot&quot;:true,&quot;flow-children&quot;:&quot;row&quot;}"
+                                        class="profile_item_links">
+                                        <div data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                            class="profile_count_link ellipsis">
+                                            <a href="https://steamcommunity.com/id/k3chow2/games/?tab=all">
+                                                <span class="count_link_label">Posts</span>&nbsp;
+                                                <span class="profile_count_link_total">
+                                                    143 </span>
+                                            </a>
+                                        </div>
+                                        <div style="clear: left;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="profile_group_links profile_count_link_preview_ctn responsive_groupfriends_element"
+                                    data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}">
+                                    <div data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                        class="profile_count_link ellipsis">
+                                        <a href="https://steamcommunity.com/id/k3chow2/groups/">
+                                            <span class="count_link_label">Groups</span>&nbsp;
+                                            <span class="profile_count_link_total">2 </span>
+                                        </a>
+                                    </div>
+                                    <div class="profile_count_link_preview">
+                                        <div class="profile_group profile_primary_group">
+                                            <div class="profile_group_avatar">
+                                                <a href="https://steamcommunity.com/groups/fallout76helpers">
+                                                    <img
+                                                        src="https://avatars.cloudflare.steamstatic.com/d93639521bf5de53f6af4880282ae1f2c4c1a595_medium.jpg">
+                                                </a>
+                                            </div>
+                                            <a class="whiteLink"
+                                                href="https://steamcommunity.com/groups/fallout76helpers">
+                                                Fallout 76 helper </a>
+                                            <div class="profile_group_membercount">1 Members</div>
+                                            <div style="clear: left;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="profile_friend_links profile_count_link_preview_ctn responsive_groupfriends_element"
+                                    data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}">
+                                    <div data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                        class="profile_count_link ellipsis">
+                                        <a href="https://steamcommunity.com/id/k3chow2/friends/">
+                                            <span class="count_link_label">Friends</span>&nbsp;
+                                            <span class="profile_count_link_total">20 </span>
+                                        </a>
+                                    </div>
+
+
+                                    <div class="profile_topfriends profile_count_link_preview">
+                                        <div data-panel="{&quot;flow-children&quot;:&quot;column&quot;}"
+                                            class="friendBlock persona online" data-miniprofile="40003403">
+                                            <a class="friendBlockLinkOverlay"
+                                                href="https://steamcommunity.com/id/magicmonkey88"></a>
+                                            <div class="friendPlayerLevel lvl_60">
+                                                <span class="friendPlayerLevelNum">66</span>
+                                            </div>
+                                            <div class="playerAvatar online">
+                                                <img
+                                                    src="https://avatars.cloudflare.steamstatic.com/1520df7f4dd67d72db7ab538aa81ace3f80c286a_medium.jpg">
+                                            </div>
+                                            <div class="friendBlockContent">
+                                                ☢Magic M〄nkey☢<br>
+                                                <span class="friendSmallText">
+                                                    Online
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile_leftcol">
+                                <div class="profile_recentgame_header profile_leftcol_header">
+                                    <h2>Recent Activity</h2>
+                                    <div style="clear: both;"></div>
+                                </div>
+
+                                <div class="recent_games">
+                                    <div class="recent_game">
+                                        <div data-panel="{&quot;type&quot;:&quot;PanelGroup&quot;}"
+                                            class="recent_game_content">
+                                            <div id="user-details"></div>
+                                            <div class="game_info">
+                                                <div class="game_info_cap " ><a
+                                                        href="https://steamcommunity.com/app/2012840"><img
+                                                            class="game_capsule"
+                                                            src="https://cdn.cloudflare.steamstatic.com/steam/apps/2012840/capsule_184x69.jpg?t=1676573697"></a>
+                                                </div>
+                                                <div class="game_info_details" >
+                                                </div>
+                                                <div class="game_name"><a class="whiteLink"id="title" href="https://steamcommunity.com/app/2012840">Portal with RTX</a></div>
+                                            </div>
+                                            <div class="game_info_stats">
+                                                <div class="game_info_achievements_only_ctn">
+                                                    <div class="game_info_achievements">
+                                                        <div class="game_info_achievements_summary_area">
+                                                            <!-- <span class="game_info_achievement_summary">
+                                                                <a class="whiteLink"
+                                                                    href="https://steamcommunity.com/id/k3chow2/stats/2012840/achievements/">Achievement
+                                                                    Progress</a>
+                                                                &nbsp; <span class="ellipsis">13 of 15</span>
+                                                            </span> -->
+                                                            <!-- <div class="achievement_progress_bar_ctn">
+                                                                <div class="progress_bar" style="width: 13%;">
+
+                                                                </div> -->
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="achievement_icons">
+                                                            <div class="game_info_achievement"
+                                                                data-tooltip-text="Lab Rat">
+                                                                <a
+                                                                    href="https://steamcommunity.com/id/k3chow2/stats/2012840/achievements/">
+                                                                    <img
+                                                                        src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/2012840/b688a474ef4750a8e0ff18a3920e57ca84af3a1e.jpg">
+                                                                </a>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <div style="clear: both;"></div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="commentthread_area" id="commentthread_Profile_76561198303418136_area">
+                                        <div class="commentthread_header">
+                                            <div class="commentthread_paging "
+                                                id="commentthread_Profile_76561198303418136_pagecontrols"
+                                                style="display: none;">
+                                                <a id="commentthread_Profile_76561198303418136_pagebtn_prev"
+                                                    href="javascript:void(0);" class="pagebtn">&lt;</a>
+                                                <span id="commentthread_Profile_76561198303418136_pagelinks"
+                                                    class="commentthread_pagelinks"></span>
+                                                <span id="commentthread_Profile_76561198303418136_pagedropdown"
+                                                    class="commentthread_pagedropdown"><select>
+                                                        <option value="0">1</option>
+                                                        <option value="0">1</option>
+                                                    </select></span>
+                                                <a id="commentthread_Profile_76561198303418136_pagebtn_next"
+                                                    href="javascript:void(0);" class="pagebtn">&gt;</a>
+                                            </div>
+                                            <div class="commentthread_count">
+                                                <span class="ellipsis commentthread_count_label">
+                                                    <span class="commentthread_header_label">Comments</span>
+                                                </span>
+                                                <div data-panel="{&quot;focusable&quot;:true,&quot;clickOnActivate&quot;:true}"
+                                                    class="commentthread_subscribe_ctn "
+                                                    id="commentthread_Profile_76561198303418136_subscribe_checkbox">
+                                                    <span class="commentthread_subscribe_checkbox">
+                                                        <span class="commentthread_subscribe_check"></span>
+                                                    </span>
+                                                    <span class="commentthread_subscribe_desc">
+                                                        Subscribe to thread </span>
+                                                </div><span class="commentthread_subscribe_hint"
+                                                    data-tooltip-text="Subscribe to a thread to receive a comment notification whenever someone posts a new comment.">
+                                                    (<span class="commentthread_subscribe_hint_q">?</span>)</span>
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                        
+                                        <div class="commentthread_comment_container"
+                                            id="commentthread_Profile_76561198303418136_postcontainer">
+                                            <div class="commentthread_comments"
+                                                id="commentthread_Profile_76561198303418136_posts">
+
+
+                                                <div data-panel="{&quot;flow-children&quot;:&quot;row&quot;,&quot;type&quot;:&quot;PanelGroup&quot;}"
+                                                    class="commentthread_comment responsive_body_text   "
+                                                    id="comment_5051317596409463424" >
+                                                    <div class="commentthread_comment_avatar playerAvatar offline">
+                                                        <a href="https://steamcommunity.com/id/WhiskasShop"
+                                                            data-miniprofile="381606936">
+                                                            <img src="https://avatars.cloudflare.steamstatic.com/a2f0101291edee83c227846963c2c08f69acbc8c.jpg"
+                                                                srcset="https://avatars.cloudflare.steamstatic.com/a2f0101291edee83c227846963c2c08f69acbc8c.jpg 1x, https://avatars.cloudflare.steamstatic.com/a2f0101291edee83c227846963c2c08f69acbc8c_medium.jpg 2x">
+                                                        </a>
+                                                    </div>
+                                                    <div class="commentthread_comment_content">
+                                                        <div data-panel="{&quot;flow-children&quot;:&quot;row&quot;}"
+                                                            class="commentthread_comment_author">
+                                                            <a class="hoverunderline commentthread_author_link"href="https://steamcommunity.com/id/WhiskasShop"data-miniprofile="381606936"><bdi><span class="actual_persona_name" id="username"></span></bdi></a>
+                                                            <span class="commentthread_comment_timestamp"title="19 January, 2021 @ 7:42:06 pm GMT"data-timestamp="1611085326" id="blog-posts">19 Jan, 2021 @ 7:42pm&nbsp;</span>
+                                                            <div class="commentthread_comment_actions" >
+                                                                <a class="actionlink report_and_hide"
+                                                                    href="javascript:void(0)"
+                                                                    data-tooltip-text="Hide and report this comment"
+                                                                    onclick="CCommentThread.HideAndReport( 'Profile_76561198303418136', '5051317596409463424', 1 )"><img
+                                                                        src="https://community.cloudflare.steamstatic.com/public/images/skin_1/notification_icon_flag_light.png?v=1"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="commentthread_comment_text"
+                                                            id="comment_content_5051317596409463424">
+                                                            +rep very very friendly, and best player or csgo <img
+                                                                src="https://community.cloudflare.steamstatic.com/economy/emoticon/winter2019cooldog"
+                                                                alt=":winter2019cooldog:" class="emoticon"> </div>
+                                                    </div>
+                                                </div>
+                                                <div data-panel="{&quot;flow-children&quot;:&quot;row&quot;,&quot;type&quot;:&quot;PanelGroup&quot;}"
+                                                    class="commentthread_comment responsive_body_text   "
+                                                    id="comment_4276687120046860188" >
+                                                    <div class="commentthread_comment_avatar playerAvatar offline">
+                                                        <a href="https://steamcommunity.com/id/dj_choppy"
+                                                            data-miniprofile="399964094">
+                                                            <img src="https://avatars.cloudflare.steamstatic.com/834b17c708ae861934e6de737cf5feba3eb3b139.jpg"
+                                                                srcset="https://avatars.cloudflare.steamstatic.com/834b17c708ae861934e6de737cf5feba3eb3b139.jpg 1x, https://avatars.cloudflare.steamstatic.com/834b17c708ae861934e6de737cf5feba3eb3b139_medium.jpg 2x">
+                                                        </a>
+                                                    </div>
+                                                    <div class="commentthread_comment_content" id="comment_content_4276687120046860188">
+                                                        <div data-panel="{&quot;flow-children&quot;:&quot;row&quot;}" class="commentthread_comment_author">
+                                                            <!-- Assuming getUserNameById is a function to fetch username by ID -->
+                                                            <a class="hoverunderline commentthread_author_link" href="https://steamcommunity.com/id/dj_choppy" data-miniprofile="399964094">
+                                                                <bdi id="comment_author_4276687120046860188">Loading username...</bdi>
+                                                            </a>
+                                                            <span class="commentthread_comment_timestamp" title="15 September, 2020 @ 11:24:44 pm GMT" data-timestamp="1600208684">
+                                                                15 Sep, 2020 @ 11:24pm&nbsp;
+                                                            </span>
+                                                            <div class="commentthread_comment_actions">
+                                                                <a class="actionlink report_and_hide" href="javascript:void(0)" data-tooltip-text="Hide and report this comment" onclick="CCommentThread.HideAndReport('Profile_76561198303418136', '4276687120046860188', 1)">
+                                                                    <img src="https://community.cloudflare.steamstatic.com/public/images/skin_1/notification_icon_flag_light.png?v=1">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="commentthread_comment_text">
+                                                            +Rep Good team player
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+                                                <div data-panel="{&quot;flow-children&quot;:&quot;row&quot;,&quot;type&quot;:&quot;PanelGroup&quot;}"
+                                                    class="commentthread_comment responsive_body_text   "
+                                                    id="comment_2565312892664714525" >
+                                                    <div class="commentthread_comment_avatar playerAvatar offline">
+                                                        <a href="https://steamcommunity.com/profiles/76561198880986501"
+                                                            data-miniprofile="920720773">
+                                                            <img src="https://avatars.cloudflare.steamstatic.com/a9817568c48b3315b48fc670091f8c054caf0b9f.jpg"
+                                                                srcset="https://avatars.cloudflare.steamstatic.com/a9817568c48b3315b48fc670091f8c054caf0b9f.jpg 1x, https://avatars.cloudflare.steamstatic.com/a9817568c48b3315b48fc670091f8c054caf0b9f_medium.jpg 2x">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="commentthread_footer">
+                                            <div class="commentthread_paging"
+                                                id="commentthread_Profile_76561198303418136_fpagecontrols"
+                                                style="display: none;">
+                                                <a id="commentthread_Profile_76561198303418136_fpagebtn_prev"
+                                                    href="javascript:void(0);" class="pagebtn">&lt;</a>
+                                                <span id="commentthread_Profile_76561198303418136_fpagelinks"
+                                                    class="commentthread_pagelinks"></span>
+                                                <span id="commentthread_Profile_76561198303418136_fpagedropdown"
+                                                    class="commentthread_pagedropdown"><select>
+                                                        <option value="0">1</option>
+                                                        <option value="0">1</option>
+                                                    </select></span>
+                                                <a id="commentthread_Profile_76561198303418136_fpagebtn_next"
+                                                    href="javascript:void(0);" class="pagebtn">&gt;</a>
+                                            </div>
+                                            <div style="clear: both;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="clear: right;"></div>
+                                </div>
+
+
+                            </div>
+
+                            <div style="clear: both;"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                     <!-- <div id="blog-form">
+                    <textarea id="post-title" placeholder="Write your TITLE HEADING..."></textarea>
+                    <textarea id="post-content" placeholder="Write your post..."></textarea>
+                    Replace the input field for image URL with a file input 
+                    <input type="file" id="post-image-file" accept="image/*">
+                    <button id="post" onclick="submitPost()">Post</button>
+
+                </div>
+           <div class="login-container">
+                    <form id="login-form">
+                        <input type="email" id="email" placeholder="Email" required>
+                        <input type="password" id="password" placeholder="Password" required>
+                        <label for="remember-me" hidden>Remember Me:</label>
+                        <input type="checkbox" id="remember-me" checked hidden>
+                        <button type="submit">Login</button>
+                    </form>
+                </div> -->
+
+
+            </div> <!-- responsive_page_frame -->
+
+</body>
+
+<script src="./userprofilepostbox.js"></script>
+
+</html>

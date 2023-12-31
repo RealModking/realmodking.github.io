@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+    <script src="admin.js"></script>
+
+    <title>Admin Page</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="#" onclick="showContent('dashboardContent')">Dashboard</a></li>
+            <li><a href="#" onclick="showContent('usersContent')">Users</a></li>
+            <li><a href="#" onclick="showContent('settingsContent')">Settings</a></li>
+            <!-- Add more items as needed -->
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="dashboardContent" class="page-content">
+            <h2>Dashboard</h2>
+            <!-- Add dashboard content here -->
+        </div>
+
+        <div id="usersContent" class="page-content">
+            <h2>Users</h2>
+            <div id="userDetails">
+                <!-- User details will be displayed here dynamically -->
+            </div>
+            <button onclick="addUser()">Add User</button>
+        </div>
+
+        <div id="settingsContent" class="page-content">
+            <h2>Settings</h2>
+            <!-- Add settings content here -->
+        </div>
+    </div>
+
+
+</body>
+</html>
