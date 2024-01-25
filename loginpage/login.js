@@ -183,7 +183,8 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     
     if (loginResult.success) {
-        console.log("Login successful");
+        // console.log("Login successful");
+        alert("Login successful");
         // buttonlogin.disabled = true
         window.location.href = "../index.html";
     } else {
@@ -238,18 +239,20 @@ document.getElementById("signupForm").addEventListener("submit", async function 
             profilePictureUrl: profilePictureUrl,
             tag: ["User"],
             username: username,
-            following: 0,
-            Followers: 0,
+            followingCount: 0,
+            followersCount: 0,
+            following: [""],
             profileUserId: userIdrandom,
             verified: false,
-            biotext: "Sorry you don't have a bio yet.",
+            bio: "Sorry you don't have a bio yet.",
             balance: 0,
-            isBanned: false,
+    
             // test: userIdrandom
             // Add other user data as needed
         });
 
-        console.log("User signed up successfully");
+        // console.log("User signed up successfully");
+        alert("User signed up successfully");
     } catch (error) {
         console.error("Sign up failed: " + error.message);
     }
