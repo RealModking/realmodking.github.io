@@ -41,26 +41,35 @@ document.addEventListener("DOMContentLoaded", function () {
     // Create a user card HTML element
     function createUserCard(user) {
         const userCard = document.createElement("li");
+        
         userCard.classList.add("user-card");
 
         // Add user details to the card<p>${user.roles}</p>
         userCard.innerHTML = `
             <img src="${user.profilePictureUrl}" alt="Profile Picture" class="profile-picture">
             <h3>Username: ${user.username}</h3>
+            <h4>verified: ${user.verified}</h4>
             <p>Rank: ${user.roles}</p>
             <p>Tag: ${user.tag}</p>
+            <p>Bio: ${user.bio}</p>
+            <p>Followers: ${user.followersCount}</p>
+            <!-- Include the necessary HTML elements -->
+            <button class="follow-btn" onclick="followUser('${user.uid}')">Follow</button>
+            <button class="message-btn" id="openMessageMenu" onclick="sendMessage('${user.uid}')">Message</button>
             <p>Status: ${user.online ? 'Online' : 'Offline'}</p>
         `;
 
         // Add a click event listener to navigate to the user profile page
-        userCard.addEventListener("click", function () {
-            // Navigate to the detailed user profile page with user ID
-            window.location.href = `/userlist/userprofile/userprofile.html?uid=${user.uid}`;
-        });
+        // userCard.addEventListener("click", function () {
+        //     // Navigate to the detailed user profile page with user ID
+        //     window.location.href = `/userlist/userprofile/userprofile.html?uid=${user.uid}`;
+        // });
 
         return userCard;
+        
     }
 
+    
     // Fetch user list on page load
     fetchUserList();
 
@@ -71,7 +80,103 @@ document.addEventListener("DOMContentLoaded", function () {
             fetchUserList();
         }
     });
-});
+});    
+
+function followUser(uid, followersCount) {
+    const user = auth.currentUser;
+
+    // Check if the user is authenticated
+    if (!user) {
+        console.error("User not authenticated");
+        return;
+    }
+
+    // Check if the user is trying to follow themselves
+    if (user.uid === uid) {
+        console.error("Cannot follow yourself");
+        return;
+    }
+
+    // Reference to the current user's document
+    const userDocRef = db.collection("users").doc(user.uid);
+
+    // Reference to the user being followed
+    const followedUserDocRef = db.collection("users").doc(uid);
+
+    // Fetch documents using Promise.all
+    Promise.all([
+        userDocRef.get(),
+        followedUserDocRef.get()
+    ]).then(([userDoc, followedUserDoc]) => {
+        // Check if documents exist
+        if (!userDoc.exists || !followedUserDoc.exists) {
+            console.log("User documents not found");
+            return;
+        }
+
+        // Get necessary data from documents
+        const followingList = userDoc.data().following || [];
+        const followersCount = followedUserDoc.data().followersCount || 0;
+        const followingCount = userDoc.data().followingCount || 0;
+
+        if (followingList.includes(uid)) {
+            // Already following, unfollow
+            return Promise.all([
+                userDocRef.update({
+                    following: firebase.firestore.FieldValue.arrayRemove(uid),
+                    followingCount: Math.max(0, followingCount - 1),
+                }),
+                followedUserDocRef.update({
+                    followersCount: Math.max(0, followersCount - 1),
+                })
+            ]);
+        } else {
+            // Not following, follow
+            return Promise.all([
+                userDocRef.update({
+                    following: firebase.firestore.FieldValue.arrayUnion(uid),
+                    followingCount: followingCount + 1,
+                }),
+                followedUserDocRef.update({
+                    followersCount: followersCount + 1,
+                })
+            ]);
+        }
+    }).then(() => {
+        // Reload the page after the follow action is completed
+        location.reload();
+    }).catch(error => {
+        console.error("Error in followUser:", error);
+    });
+}
+
+
+
+function sendMessage(uid) {
+    const user = auth.currentUser;
+
+    // Check if the user is authenticated
+    if (!user) {
+        console.error("User not authenticated");
+        return;
+    }
+
+    // Check if the user is trying to send a message to themselves
+    if (user.uid === uid) {
+        console.error("Cannot send a message to yourself");
+        return;
+    }
+
+    // You can implement your messaging logic here
+    // For simplicity, let's just log a message
+    console.log(`Sending a message from user ${user.uid} to user ${uid}`);
+}
+
+// Example of using the sendMessage function
+sendMessage("targetUserId");
+
+
+
 
 
 
@@ -163,3 +268,28 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // Now userData is accessible in the entire script
 // You can use userData in other parts of your code if needed
+// Function to check if a user is banned
+async function isUserBanned(userId) {
+    try {
+        const userDoc = await firebase.firestore().collection("bannedUsers").doc(userId).get();
+
+        return userDoc.exists; // Return true if the user is banned, false otherwise
+    } catch (error) {
+        console.error("Error checking if user is banned:", error);
+        return false; // Assume not banned in case of an error
+    }
+}
+
+// Example usage
+const userId = sessionStorage.getItem("userId"); // Replace with the actual user ID
+
+isUserBanned(userId).then(isBanned => {
+    if (isBanned) {
+        console.log("User is banned.");
+        // Implement logic for handling a banned user (e.g., display a message, restrict access)
+        window.location.href = '../accountdisable/accountdisable.html'
+    } else {
+        console.log("User is not banned.");
+        // Implement logic for handling a non-banned user
+    }
+});

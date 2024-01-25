@@ -18,126 +18,95 @@ var auth = firebase.auth();
 // console.log("Firebase initialized successfully");
 
 
-
 // userprofile.js
 
-// document.addEventListener("DOMContentLoaded", function () {
-//     const userDetailContainer = document.getElementById("user-details");
+document.addEventListener("DOMContentLoaded", function () {
+    const userDetailContainer = document.getElementById("user-details");
 
-//     // Extract user ID from the URL query parameters
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const userId = urlParams.get("uid");
+    // Extract user ID from the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get("uid");
 
-//     // Assuming you have a function to fetch detailed user information from Firebase
-//     function fetchUserDetails(userId) {
-//         db.collection("users").doc(userId).get().then((doc) => {
-//             if (doc.exists) {
-//                 const user = doc.data();
-//                 displayUserDetails(user);
-//             } else {
-//                 console.error("User not found");
-//             }
-//         }).catch((error) => {
-//             console.error("Error fetching user details:", error);
-//         });
-//     }
+    // Assuming you have a function to fetch detailed user information from Firebase
+    function fetchUserDetails(userId) {
+        db.collection("users").doc(userId).get().then((doc) => {
+            if (doc.exists) {
+                const user = doc.data();
+                displayUserDetails(user);
+            } else {
+                console.error("User not found");
+            }
+        }).catch((error) => {
+            console.error("Error fetching user details:", error);
+        });
+    }
 
-//     // Display user details on the page 
-//     // <img src="${user.profilePictureUrl}" alt="Profile Picture" class="profile-picture">
-//     //<h3>Username: ${user.username}</h3>
-//     // <img src="${user.profilePictureUrl}" width="200" alt="Profile Picture" class="profile-picture">
+    // Display user details on the page 
+    // <img src="${user.profilePictureUrl}" alt="Profile Picture" class="profile-picture">
+    //<h3>Username: ${user.username}</h3>
+    // <img src="${user.profilePictureUrl}" width="200" alt="Profile Picture" class="profile-picture">
             
-//     // <h3 class="user-name">${user.username}</h3>
-//     // <p>Name:${user.name} </p>
-//     // <p>Rank: ${user.roles}</p>
-//     // <p>Tag: ${user.tag}</p>
-//     // <p id="followersCount">Followers: ${user.Followers}</p>
-//     // <p id="followingCount">following: ${user.following}</p>
-//     // <p>Status: ${user.online ? 'Online' : 'Offline'}</p>
-//     //                <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>              <div class="myDIV">Hover over me to display the profilepageId</div>
-//               // <div class="hide"><p class="user-mail"><i class="fa fa-envelope"></i> <span id="">${user.profileUserId}</span></p></div>  
-//     //<button class="createbtn" id="Create-post"><i class="fa fa-plus"></i> Friend request</button>  Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
+    // <h3 class="user-name">${user.username}</h3>
+    // <p>Name:${user.name} </p>
+    // <p>Rank: ${user.roles}</p>
+    // <p>Tag: ${user.tag}</p>
+    // <p id="followersCount">Followers: ${user.Followers}</p>
+    // <p id="followingCount">following: ${user.following}</p>
+    // <p>Status: ${user.online ? 'Online' : 'Offline'}</p>
+    //                <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>              <div class="myDIV">Hover over me to display the profilepageId</div>
+              // <div class="hide"><p class="user-mail"><i class="fa fa-envelope"></i> <span id="">${user.profileUserId}</span></p></div>  
+    //<button class="createbtn" id="Create-post"><i class="fa fa-plus"></i> Friend request</button>  Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
 
-// function displayUserDetails(user) {    
-//         userDetailContainer.innerHTML = `
+    function displayUserDetails(user) {
+        userDetailContainer.innerHTML = `
         
-//         <div class="container" id="user-details">
-//         <div class="profile-header">
-//           <div class="profile-img">
-//             <img  width="200" id="profilePicture" src="${user.profilePictureUrl}" alt="Profile Picture">
-//           </div>
-//           <div class="profile-nav-info">
-//             <h3 class="user-name">username:${user.username}</h3>
-//             <p  id="state" class="state">Rank:${user.roles}</p>
-//             <div class="address">
-//               <p id="state" class="state">@${user.name}</p>
-//               <span id="country" class="country"></span>
-//             </div>
-//           </div>
-//         </div>
-//         <div class="main-bd">
-//           <div class="left-side">
-//             <div class="profile-side">
-//               <div class="myDIV">Hover over me to display the verified user.</div>
-//               <div class="hide"><p class="user-mail"><i class="fa fa-envelope"></i> <span id="">verified  ${user.verified}</span></p></div>              
-//               <p class="mobile-no"><i class="fa fa-phone"></i></p>
+        <div class="profile-card">
+        <!-- <input type="file" id="profile-picture-input" style="display: none;" accept="image/*"> -->
+        <img id="profile-picture" class="profile-img" src="${user.profilePictureUrl}" width="150" height="150" alt="User Image">
+        <div class="profile-details">
+            <div class="username-status">
+                <span> </span>
+                <h2 id="status">${user.username}</h2>
+                
+            </div>
       
-//               <br>      
             
-//               <div class="user-bio">
-//                 <h3>Bio</h3>
-//                 <p class="bio">
-//                   ${user.biotext}
-//                 </p>
-//               </div>
-//               <div class="profile-btn">
+            <!-- <p id="displayText">Display 2Text</p> -->
+            <pclass="profile-rank">${user.roles}</p>
+           
+        </div>
+        <p id="cash"></p>
+        <p class="profile-posts">Posts: <span id="user-posts"></span></p>
+        <p class="profile-friends">Friends: 15</p>
+        <!-- <p id="status"></p> -->
+        <p id="myDIV" STYLE="display:none">Your userId: kDnFgSRL5AYunX5z8DfqvRCfRzf1</p>
+        <a href="./editprofile.html"><button  class="edit-btn">Edit Profile</button></a>
+        <button onclick="myFunction()" class="edit-btn">Show your userId</button>
+        <!-- <a href="./editprofile.html">test</a> -->
+        <div class="profile-container">
+            <!-- <img id="profile-picture" src="default-profile.png" alt="Profile Picture"> -->
+            <button id="edit-button">Edit</button>
+        </div>
+        
+        <div class="edit-menu" id="edit-menu">
+            <!-- <img id="edit-profile-picture" src="default-profile.png">
+            <input type="file" id="file-input"> -->
+            <input type="file" id="file-input"  accept="image/*">
+            <img id="edit-profile-picture" alt="it Profile Picture" style="width: 100px; border-radius: 50%; height: 100px;" src="https://firebasestorage.googleapis.com/v0/b/login-b6f02.appspot.com/o/profilePictures%2FujixagtNCWgx7JB1xADtryLucCC2%2Fcyberpunk-x-batman-pfp-1.png?alt=media&amp;token=3b2e9130-9fd8-4008-8986-18ca36889376" title="Edit Profile Picture">
+          
+            <button id="save-button">Save</button>
+        </div>  
+        <div>
+            <H2>Bio Text</H2>
+            <p id="biotext"></p>
+        </div>
+        </div>
+        `;
+    }
 
-//               </div>
-
-//             </div>
-      
-//           </div>
-//           <div class="right-side">
-      
-//             <div class="nav">
-//               <ul>
-//                 <li onclick="tabs(0)" class="user-post active">Posts</li>
-//                 <li onclick="tabs(1)" class="user-review">Reviews</li>
-//                 <li onclick="tabs(2)" class="user-setting"> Settings</li>
-//               </ul>
-//             </div>
-//             <div class="profile-body">
-//               <div class="profile-posts tab">
-//                 <h1>Your Post</h1>
-//                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
-//                   magni eius magnam repellendus. Quidem inventore repudiandae sunt odit. Aliquid facilis fugiat earum ex officia eveniet, nisi, similique ad ullam repudiandae molestias aspernatur qui autem, nam? Cupiditate ut quasi iste, eos perspiciatis maiores
-//                   molestiae.</p>
-//               </div>
-//               <div class="profile-reviews tab">
-//                 <h1>User reviews</h1>
-//                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi, tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui nihil voluptas. Maiores debitis
-//                   repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae! Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi dolorum minus sit eaque error
-//                   sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
-//               </div>
-//               <div class="profile-settings tab">
-//                 <div class="account-setting">
-//                   <h1>Acount Setting</h1>
-//                   <p>adsadLorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum, facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo velit omnis, debitis maxime, sequi
-//                     animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim quam voluptatum vel debitis
-//                     nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//             <!-- Add other user details as needed -->
-//         `;
-//     }
-
-//     // Fetch and display user details on page load
-//     fetchUserDetails(userId);
-// });
+    // Fetch and display user details on page load
+    fetchUserDetails(userId);
+});
 
 
 
@@ -412,7 +381,7 @@ async function loginUser(email, password, rememberMe) {
 
         return { success: true, user };
     } catch (error) {
-        window.location.href = "../loginpage/login.html"
+        window.location.href = "./loginpage/login.html"
         return { success: false, error: error.message };
     }
 }
@@ -473,6 +442,51 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
+// $(".nav ul li").click(function() {
+//     $(this)
+//       .addClass("active")
+//       .siblings()
+//       .removeClass("active");
+//   });
+  
+  const tabBtn = document.querySelectorAll(".nav ul li");
+  const tab = document.querySelectorAll(".tab");
+  
+  function tabs(panelIndex) {
+    tab.forEach(function(node) {
+      node.style.display = "none";
+    });
+    // tab[panelIndex].style.display = "block";
+  }
+  tabs(0);
+  
+  let bio = document.querySelector(".bio");
+  const bioMore = document.querySelector("#see-more-bio");
+  // const bioLength = bio.innerText.length;
+  
+  function bioText() {
+    // bio.oldText = bio.innerText;
+  
+    // bio.innerText = bio.innerText.substring(0, 100) + "...";
+    // bio.innerHTML += `<span onclick='addLength()' id='see-more-bio'>See More</span>`;
+  }
+  //        console.log(bio.innerText)
+  
+  bioText();
+  
+  function addLength() {
+    bio.innerText = bio.oldText;
+    bio.innerHTML +=
+      "&nbsp;" + `<span onclick='bioText()' id='see-less-bio'>See Less</span>`;
+    document.getElementById("see-less-bio").addEventListener("click", () => {
+      document.getElementById("see-less-bio").style.display = "none";
+    });
+  }
+  // if (document.querySelector(".alert-message").innerText > 9) {
+    // document.querySelector(".alert-message").style.fontSize = ".7rem";
+  // }
+
+
 
 
   
@@ -481,16 +495,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
             // User is logged in, fetch and display the user's profile
-            const userNameElement = document.getElementById("user-name");
-            const userEmailElement = document.getElementById("user-email");
-            const userIdElement = document.getElementById("user-id");
-            const userRankElement = document.getElementById("user-rank");
-            const userUsernameElement = document.getElementById("username");
-            const biotextelement = document.getElementById("biotext");
+            // const userNameElement = document.getElementById("user-name");
+            // const userEmailElement = document.getElementById("user-email");
+            // const userIdElement = document.getElementById("user-id");
+            // const userRankElement = document.getElementById("user-rank");
+            // const userUsernameElement = document.getElementById("username");
             const UserUsernameElement = document.getElementById("uusername");
-            const profilePictureElement = document.getElementById("profile-picture");
-            const usertitleElement = document.getElementById("user-title");
-            const postsContainer = document.getElementById("user-posts");
+            // const profilePictureElement = document.getElementById("profile-picture");
+            // const usertitleElement = document.getElementById("user-title");
+            // const postsContainer = document.getElementById("user-posts");
 
             try {
                 // Fetch user data from Firestore based on user's UID
@@ -498,15 +511,14 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 if (userDoc.exists) {
                     const userData = userDoc.data();
-                    userNameElement.textContent = userData.name || "Unknown";
-                    userEmailElement.textContent = user.email || "Unknown Email";
-                    userIdElement.textContent = user.uid || "Unknown id";
-                    userRankElement.textContent = userData.roles || "Unknown Rank";
-                    userUsernameElement.textContent = `User Profile: ${userData.username}` || "Unknown Username";
-                    biotextelement.textContent = userData.bio || "Sorry you don't have a bio yet.";
-                    UserUsernameElement.textContent = userData.username || "Unknown Username";
-                    usertitleElement.textContent = userData.tag || "Unknown tag";
-                    postsContainer.textContent = userData.postCount || "No posts found.";
+                    // userNameElement.textContent = userData.name || "Unknown";
+                    // userEmailElement.textContent = user.email || "Unknown Email";
+                    // userIdElement.textContent = user.uid || "Unknown id";
+                    // userRankElement.textContent = userData.roles || "Unknown Rank";
+                    UserUsernameElement.textContent = `User Profile: ${userData.username}` || "Unknown Username";
+                    // UserUsernameElement.textContent = userData.username || "Unknown Username";
+                    // usertitleElement.textContent = userData.tag || "Unknown tag";
+                    // postsContainer.textContent = userData.postCount || "No posts found.";
                     
 
                     // Display profile picture with rounded corners
@@ -535,28 +547,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 });
 
-//   Initialize Firebase
+  // Initialize Firebase
 // (Already included in your HTML file)
 
-// Check user authentication state
-firebase.auth().onAuthStateChanged(function(user) {
-  var verifiedIcon = document.getElementById('verifiedIcon');
-  var unverifiedIcon = document.getElementById('unverifiedIcon');
+// // Check user authentication state
+// firebase.auth().onAuthStateChanged(function(user) {
+//   var verifiedIcon = document.getElementById('verifiedIcon');
+//   var unverifiedIcon = document.getElementById('unverifiedIcon');
 
-  if (user) {
-    // User is signed in
-    if (user.emailVerified) {
-      // User is verified
-      verifiedIcon.style.display = 'block';
-      unverifiedIcon.style.display = 'none';
-    } else {
-      // User is not verified
-      verifiedIcon.style.display = 'none';
-      unverifiedIcon.style.display = 'block';
-    }
-  } else {
-    // User is signed out
-    verifiedIcon.style.display = 'none';
-    unverifiedIcon.style.display = 'none';
-  }
-});
+//   if (user) {
+//     // User is signed in
+//     if (user.emailVerified) {
+//       // User is verified
+//       verifiedIcon.style.display = 'block';
+//       unverifiedIcon.style.display = 'none';
+//     } else {
+//       // User is not verified
+//       verifiedIcon.style.display = 'none';
+//       unverifiedIcon.style.display = 'block';
+//     }
+//   } else {
+//     // User is signed out
+//     verifiedIcon.style.display = 'none';
+//     unverifiedIcon.style.display = 'none';
+//   }
+// });

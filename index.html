@@ -1,191 +1,124 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./login.css">
-    <title>Vortex Network Blog webiste</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div class="topnav" id="myTopnav">
-  <a href="index.html">Home</a>
-  <!-- <a href="/firends//friends.html">Friends</a> -->
-  <a href="./userlist/userlist.html">User list</a>
-  <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
-  <!-- <button id="adminButton" style="display: none;">Admin Only Button</button> -->
-  <a href="/profile/profile.html">Welcome:<div id="user-username"></div></a>
-  <!-- <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"type="submit" id="buttonlogin">Login</button> -->
-  <button onclick="signOut()" style="width:auto;">Sign Out</button>
-  
-  
-    <!-- <div class="login-container">
-        <form id="login-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <label for="remember-me">Remember Me:</label>
-            <input type="checkbox" id="remember-me">                                
-            <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
-        </form>
-    </div> -->
-    
-    <!-- <div class="login-container">
-        <form id="login-form" >
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <label for="remember-me" hidden>Remember Me:</label>
-            <input type="checkbox" id="remember-me" checked hidden>                                
-            <button id="login-form" type="submit">Login</button>
-        </form>
-      </div> -->
-  <a href="" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-    
-  </a>
-</div>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js "></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./login.css">
+  <link rel="stylesheet" href="./navbar.css">
+  <script src="./navbar.js"></script>
+  <title>Vortex Network Blog webiste</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="topnav" id="myTopnav">
+    <a href="index.html" class="active">Home</a>
+    <a href="./userlist/userlist.html">User list</a>
+    <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
+    <!-- <a href="./shop/shop.html">shop</a> -->
+    <div class="dropdown">
+      <button class="dropbtn">User Profile
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/profile/profile.html">Welcome:<div id="user-username"></div></a>
+        <a href="#">Message inbox</a>
+        <!-- <a href="#">Link 3</a> -->
+        <a href="#" onclick="signOut()" style="width:auto;">Sign Out</a>
+      </div>
+    </div>
+    <!-- <a href="#about">About</a> -->
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div>
 </head>
 
 <body class="backcolor">
-
-
-<div class="header">
-  <h2>Vortex Network Blog Post</h2>
-</div>
-<div id="banner">
-  <h1 id="bannerText">Loading...</h1>
-</div>
-<div>
-  <button onclick="openTab('allPosts')">All Posts</button>
-  <!-- <button onclick="openTab('popularPosts')">Popular Posts</button> -->
-  <button  disabled hidden onclick="openTab('recentPosts')">Recent Posts</button>
-</div>
-<!-- Tab content -->
-<div id="allPosts" class="tab active-tab">
-  <!-- Display all posts here -->
-  <p>All Posts Content</p>
+  <div class="header">
+    <h2>Vortex Network Blog Post</h2>
+  </div>
+  <div id="banner">
+    <h1 id="bannerText">Loading...</h1>
+  </div>
+  <button id="openModalButton" class="buttonpost">Post a Blog</button>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalButton">&times;</span>
+      <h2>Post something </h2>
+      <div class="textbox-container">
+        <label for="file">Upload image or Video the images must be width=320 height=180:</label>
+        <input type="file" class="modern-textbox" id="post-media-file" accept="image/*, video/*" required>
+        <!-- <input type="file" class="modern-textbox" id="post-image-file" name="file" placeholder="for images">
+        <label for="file">Upload Video:</label>
+        <input type="file" class="modern-textbox" id="post-video-file" name="video" placeholder="for videos"> -->
+        <input type="text" id="post-title" class="modern-textbox" placeholder="Title"required>
+        <input type="text" id="post-content" class="modern-textbox" placeholder="Post Content" required>
+        <button id="post" onclick="submitPost()" type="submit">submit Post</button>
+        <button id="showrules">The Rules</button>
+        <div id="therules" class="button-text">
+          <p>Rules for posting on here
+            <br>
+            Violate Community Standards: Do not post content that violates VortexNetwork's Community Standards. This
+            includes hate speech, harassment, bullying, and other forms of harmful content.
+            <br>
+            <br>
+            Misuse Personal Profiles: Do not use personal profiles for businesses or organizations. Create a
+            VortexNetwork
+            Page for such entities.
+            <br>
+            <br>
+            Spam or Phishing: Do not engage in spamming or phishing activities. This includes sending unsolicited
+            messages, creating fake accounts, or engaging in any behavior that could be considered deceptive or harmful.
+            <br>
+            <br>
+            Infringe Copyright: Do not post content that infringes on the copyrights of others. Ensure that you have the
+            right to use and share the content you post.
+            <br>
+            <br>
+            Abuse VortexNetwork Features: Do not misuse VortexNetwork features, such as likes, comments, or friend
+            requests, to engage in spammy or abusive behavior.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="leftcolumn">
     <div class="card">
-        <div id="blog-posts" class="blog-posts-container"></div>
-      
-     
+      <div id="blog-posts" class="blog-posts-container"></div>
     </div>
-
-
-     <!-- <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p> -->
-    <!-- <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div> -->
   </div>
-</div>
-
-<div id="popularPosts" class="tab" >
-  <!-- Display popular posts here -->
-  <p>Popular Posts Content</p>
-</div>
-
-<div id="recentPosts" class="tab">
-  <!-- Display recent posts here -->
-  <p>Recent Posts Content</p>
-
-</div>
-<div class="row">
-
-  <div class="rightcolumn">
-    <div class="card">
-      <h2>About Me</h2>
-      <!-- <div class="fakeimg" style="height:100px;">Image</div> -->
-      <p>The Vortex Network blog post website is likely a platform dedicated to sharing articles, blog posts, and updates related to a specific theme or community, possibly focused on technology, gaming, science, or any other niche. The website may feature a clean and user-friendly design, with categories and tags to help visitors easily navigate through different topics. The blog posts may cover a wide range of subjects, including news, tutorials, reviews, and discussions, providing valuable content for the audience.</p>
-    </div>
-    <!-- <div class="card">
-         <h2>Login</h2>
-        <form id="login-form">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <label for="remember-me">Remember Me:</label>
-            <input type="checkbox" id="remember-me">                                
-            <button type="submit">Login</button>
-        </form>
-
-        <h2>Sign Up</h2>
-        <form id="signup-form">
-            <label for="signup-username">Username:</label>
-            <input type="username" id="signup-username" required>
-            <label for="signup-email">Email:</label>
-            <input type="email" id="signup-email" required>
-            <label for="signup-password">Password:</label>
-            <input type="password" id="signup-password" required>
-            <label for="signup-name">Name:</label>
-            <input type="text" id="signup-name" required>
-            <button type="submit">Sign Up</button>
-        </form>
-      </div> -->
-
-    <div class="card">
-        <h2>Post a Blog</h2>
-        <div id="blog-form">
-            <textarea id="post-title" placeholder="Write your TITLE HEADING..."></textarea>
-            <textarea id="post-content" placeholder="Write your post..."></textarea>
-            <!-- Replace the input field for image URL with a file input -->
-            <input type="file" id="post-image-file" accept="image/*">
-            <button id="post" onclick="submitPost()" >Post</button>
-
-        </div>
-                
-        <p>Rules for posting on here                        
-
-          <br>
-          Violate Community Standards: Do not post content that violates VortexNetwork's Community Standards. This includes hate speech, harassment, bullying, and other forms of harmful content.
-          <br>
-          <br>
-          Misuse Personal Profiles: Do not use personal profiles for businesses or organizations. Create a VortexNetwork Page for such entities.
-          <br>
-          <br>
-          Spam or Phishing: Do not engage in spamming or phishing activities. This includes sending unsolicited messages, creating fake accounts, or engaging in any behavior that could be considered deceptive or harmful.
-          <br>
-          <br>
-          Infringe Copyright: Do not post content that infringes on the copyrights of others. Ensure that you have the right to use and share the content you post.
-          <br>
-          <br>
-          Abuse VortexNetwork Features: Do not misuse VortexNetwork features, such as likes, comments, or friend requests, to engage in spammy or abusive behavior.</p>
+  <div class="row">
+    <div class="rightcolumn">
+      <div class="card">
+        <h2>About Me</h2>
+        <p>The Vortex Network blog post website is likely a platform dedicated to sharing articles, blog posts, and
+          updates related to a specific theme or community, possibly focused on technology, gaming, science, or any
+          other niche. The website may feature a clean and user-friendly design, with categories and tags to help
+          visitors easily navigate through different topics. The blog posts may cover a wide range of subjects,
+          including news, tutorials, reviews, and discussions, providing valuable content for the audience.</p>
       </div>
-    
-    <div class="card">
-      <h3>Popular Post</h3>
-      <div class="fakeimg">Image</div><br>
-      <div class="fakeimg">Image</div><br>
-      <div class="fakeimg">Image</div>
-    </div>
-    <div class="card">
-      <h3>Follow Me</h3>
-      <p>Twitch:<a href="twitch.tv/ogmindofmilk_k3chow1"class="links"> twitch.tv/ogmindofmilk_k3chow1</a></p>
-      <p>Twitter:<a href="twitter.com/k3chow1" class="links"> twitter.com/k3chow1</a></p>            
-      <p>Youtube:</p>
-      <p>Tiktok:</p>
+      <div class="card">
+        <h3>Popular Users </h3>
+        <div id="popular-users">
+          
+        </div><br>
+      </div>
+      <div class="card">
+        <h3>Follow Me</h3>
+        <p>Twitch:<a href="https://www.twitch.tv/ogmindofmilk_k3chow1" class="links"> twitch.tv/ogmindofmilk_k3chow1</a></p>
+        <p>Twitter:<a href="https://www.twitter.com/k3chow1" class="links"> twitter.com/k3chow1</a></p>
+        <p>Kick:<a href="https://kick.com/ogmindofmilk-k3chow1"class="links">kick.com/ogmindofmilk-k3chow1</a></p>
+        <p>Youtube:<a href="https://www.youtube.com/channel/UCkEccwkMIPjd_b-F7KITiuQ?sub_confirmation=1" class="links">youtube.com/@AshleyWallis</a></p>
+        <p>Tiktok:<a href="https://www.tiktok.com/@ogmindofmilk" class="links">tiktok.com/@ogmindofmilk</a></p>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="footer">
-  <h2>&copy; Copyright 2023 VortexNetwork</h2>
-</div>
-
+  <div class="footer">
+    <h2>&copy; Copyright 2024 VortexNetwork</h2>
+  </div>
 </body>
 <script src="app.js"></script>
+
 </html>

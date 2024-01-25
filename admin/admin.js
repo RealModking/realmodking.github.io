@@ -1,7 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const userTagsContainer = document.getElementById('userTags');
-
-    // Initialize Firebase
+// Replace with your Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyCDB471aXGIg3bPnhINno3pDWF9R4IaRL8",
     authDomain: "login-b6f02.firebaseapp.com",
@@ -11,83 +8,75 @@ var firebaseConfig = {
     messagingSenderId: "885646037965",
     appId: "1:885646037965:web:8c53ad60166c07b7662a84",
     measurementId: "G-K783G89QF5"
-  };
+};
 
-    firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-    // Check if the user is authenticated
-    firebase.auth().onAuthStateChanged(user => {
+
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        // User is signed in, continue with your code or allow access to the page
+        // console.log('User is signed in:', user);
+    } else {
+        // User is not signed in, redirect to the login page
+        console.log('User is not signed in. Redirecting to login page...');
+        window.location.href = './loginpage/login.html'; // Replace '/login' with the actual path to your login page
+    }
+});
+
+// Function to check if the user is an admin
+function checkIfAdmin() {
+    return new Promise((resolve, reject) => {
+        const currentUserId = firebase.auth().currentUser.uid;
+
+        // Placeholder logic, replace with your actual implementation
+        // For example, check if the user ID is present in an "admins" collection
+        const adminRef = firebase.firestore().collection('users').doc(currentUserId);
+
+        adminRef.get()
+            .then(doc => {
+                const isAdmin = doc.exists;
+                alert(`Welcome: ${user.uid}`)
+                resolve(isAdmin);
+            })
+            .catch(error => {
+                console.error('Error checking admin status:', error);
+                window.location.href = '../index.html';
+                reject(error);
+            });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            const currentUserId = user.uid;
+            // User is signed in, get the user object
+            const uid = user.uid;
 
-            // Check if the user is an admin
-            checkIfAdmin(currentUserId)
-                .then(isAdmin => {
-                    if (isAdmin) {
-                        // User is an admin, fetch and display user tags
-                        fetchUserTags()
-                            .then(tags => {
-                                // Display user tags in the container
-                                displayUserTags(tags);
-                            })
-                            .catch(error => {
-                                console.error('Error fetching user tags:', error);
-                            });
-                    } else {
-                        // User is not an admin, handle accordingly
-                        console.log('Access denied. You are not an admin.');
+            // Access the user's role from Firestore
+            const userRef = firebase.firestore().collection('users').doc(uid);
+
+            userRef.get().then((doc) => {
+                if (doc.exists) {
+                    const userRole = doc.data().role;
+
+                    // Show the admin button only to admins
+                    if (userRole === 'admin') {
+                        alert(`Welcome: ${user.uid}`)
                     }
-                })
-                .catch(error => {
-                    console.error('Error checking admin status:', error);
-                });
+                } else {
+                    console.log('User document does not exist');
+                    window.location.href = '../index.html';
+                }
+            }).catch((error) => {
+                console.error('Error getting user document:', error);
+            });
         } else {
-            // User is not logged in, handle accordingly
-            console.log('You are not logged in.');
-            // You might want to redirect to the login page
+            // User is signed out, handle accordingly
+            console.log('User is not signed in.');
         }
     });
-
-    // Function to check if the user is an admin
-    function checkIfAdmin(userId) {
-        // Implement your logic to check if the user is an admin
-        // You might have an "admins" collection in Firestore or another method
-        return new Promise((resolve, reject) => {
-            // Placeholder logic, replace with your actual implementation
-            const isAdmin = true; // Replace with your actual admin check
-            resolve(isAdmin);
-        });
-    }
-
-    // Function to fetch user tags from Firestore
-    function fetchUserTags() {
-        const usersRef = firebase.firestore().collection('users');
-
-        // Assuming your user data structure includes a 'tags' field
-        return usersRef.get()
-            .then(querySnapshot => {
-                const tags = [];
-                querySnapshot.forEach(doc => {
-                    const userData = doc.data();
-                    const userTags = userData.roles || [];
-                    tags.push({ userId: doc.id, userTags });
-                });
-                return tags;
-            });
-    }
-
-    // Function to display user tags in the container
-    function displayUserTags(tags) {
-        tags.forEach(user => {
-            const userId = user.userId;
-            const userTags = user.userTags;
-
-            // Create a div for each user and display their tags
-            const userDiv = document.createElement('div');
-            userDiv.innerHTML = `<strong>User ID:</strong> ${userId}<br><strong>User Tags:</strong> ${userTags.join(', ')}<br><br>`;
-            userTagsContainer.appendChild(userDiv);
-        });
-    }
 });
 
 
@@ -95,44 +84,113 @@ var firebaseConfig = {
 
 
 
-function showContent(contentId) {
-    var contentSections = document.querySelectorAll('.page-content');
-    contentSections.forEach(function (section) {
-        section.style.display = 'none';
-    });
-
-    var selectedContent = document.getElementById(contentId);
-    if (selectedContent) {
-        selectedContent.style.display = 'block';
+// Function to ban a user
+async function banUser(userId) {
+    const currentUser = firebase.auth().currentUser;
+    
+    // Check if the current user is an admin or owner
+    if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'owner')) {
+        alert("Admins and owners cannot be banned.");
+        return;
     }
 
-    // If switching to the Users page, display user details from Firestore
-    if (contentId === 'usersContent') {
-        fetchUserDetails();
+    const banReason = prompt("Enter the reason for banning:");
+
+    if (banReason !== null) {
+        const userRef = firebase.firestore().collection("bannedUsers").doc(userId);
+        const userDoc = await userRef.get();
+
+        if (userDoc.exists) {
+            // Document exists, check if the current user is an admin or owner
+            if (currentUser && (currentUser.role === 'admin' || currentUser.role === 'owner')) {
+                // Admins and owners can cancel bans
+                await userRef.update({
+                    banned: false,
+                    banReason: null,
+                });
+            } else {
+                // Regular users can't cancel bans
+                alert("You don't have permission to cancel this ban.");
+                return;
+            }
+        } else {
+            // Document doesn't exist, create a new one
+            const user = await getUserInfo(userId);
+            await userRef.set({
+                banned: true,
+                banReason: banReason,
+                userId: userId,
+                name: user.name,
+                email: user.email,
+            });
+        }
+
+        displayUsers(); // Refresh the user list after banning
     }
 }
 
-async function fetchUserDetails() {
-    var userDetailsDiv = document.getElementById('userDetails');
-    userDetailsDiv.innerHTML = '';
 
+
+
+
+
+// Function to get user information
+async function getUserInfo(userId) {
+    const userDoc = await firebase.firestore().collection("users").doc(userId).get();
+    return userDoc.exists ? userDoc.data() : null;
+}
+
+
+// Function to unban a user
+async function unbanUser(userId) {
     try {
-        // Fetch user data from Firestore
-        const usersSnapshot = await firestore.collection('users').get();
-
-        usersSnapshot.forEach(function (userDoc) {
-            var user = userDoc.data();
-            var userDiv = document.createElement('div');
-            userDiv.innerHTML = `<p>User ID: ${user.id}</p><p>Username: ${user.username}</p><p>Tag: ${user.tag}</p>`;
-            userDetailsDiv.appendChild(userDiv);
-        });
+        // Remove the user from the bannedUsers collection
+        await firebase.firestore().collection("bannedUsers").doc(userId).delete();
+        unbanUser = alert(`unbanned: ${userId}`)
+        // Refresh the user list after unbanning
+        displayUsers();
+        window.location.href = "admin.html";
     } catch (error) {
-        console.error('Error fetching user details:', error);
+        console.error("Error unbanning user:", error);
     }
 }
 
-function addUser() {
-    // Implement logic to add a new user to Firestore (for demonstration purposes)
-    console.log('Adding a new user');
-    // You can show a form or perform any other action to add a user
+// Function to display the list of users on the admin page
+function displayUsers() {
+    const usersContainer = document.getElementById("users-container");
+
+    firebase.firestore().collection("users").get()
+        .then(snapshot => {
+            usersContainer.innerHTML = "";
+
+            snapshot.forEach(doc => {
+                const user = doc.data();
+
+                const userElement = document.createElement("div");
+                userElement.classList.add("user");
+
+                userElement.innerHTML = `
+                    <p>User ID: ${doc.id}</p>
+                    <p>Name: ${user.name || "Unknown"}</p>
+                    <p>Email: ${user.email || "Unknown"}</p>
+                    <p>Role: ${user.role || "User"}</p>
+                    <p>Role: ${user.banReason || "Unknown"}</p>
+                    <button onclick="banUser('${doc.id}')">Ban</button>
+                    <button onclick="unbanUser('${doc.id}')">Unban</button>
+                    <hr>
+                `;
+
+                usersContainer.appendChild(userElement);
+            });
+        })
+        .catch(error => {
+            console.error("Error getting users:", error);
+        });
 }
+
+
+
+// Call the function to display users on page load or as needed
+document.addEventListener('DOMContentLoaded', () => {
+    displayUsers();
+});

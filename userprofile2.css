@@ -1,0 +1,170 @@
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styling */
+        ul.navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        ul.navbar li {
+            float: left;
+        }
+
+        ul.navbar li a, .dropdown .dropbtn {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul.navbar li a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        ul.navbar li.dropdown {
+            display: inline-block;
+        }
+
+        /* Dropdown styling */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0; /* Positioning the dropdown to the left */
+            top: 100%; /* Move the dropdown content below the dropdown */
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .profile-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .profile-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .profile-rank {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .profile-friends {
+            color: #777;
+        }
+
+        .profile-posts {
+            color: #777;
+        }
+
+        .edit-btn {
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 1rem;
+        }
+
+        username-status {
+            display: inline-block;
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        #profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #edit-button {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .edit-menu {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #file-input {
+            margin-bottom: 10px;
+        }
+
+        #save-button {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        #myDIV {
+            width: 40%;
+            padding: 50px 0;
+            text-align: center;
+
+            margin-top: 20px;
+        }

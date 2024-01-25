@@ -1,0 +1,125 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: url('https://cdn.discordapp.com/attachments/716426929074602054/1195890056553042021/wp9550488-data-breach-wallpapers.jpg?ex=65b5a268&is=65a32d68&hm=af97294d82fa15973f2f7e0f797cf4fa3de8792249d8f67245d5692dd7b6f8fb&') no-repeat center center fixed ;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.container {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.container h1 {
+    text-align: center;
+    color: #FFF;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+form {
+    width: 350px;
+    margin: 10px auto;
+    background: -webkit-linear-gradient(#d9eaf4 30%, #bec7d6 70%);
+    background: linear-gradient(#d9eaf4 30%, #bec7d6 70%);
+    border-radius: 10px;
+    color: #333;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+form .signup {
+    display: block;
+    float: right;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #1c87e5;
+    margin: 35px;
+}
+
+form label {
+    clear: both;
+    display: block;
+    position: relative;
+}
+
+form label input {
+    display: block;
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #bec7d6;
+    outline: none;
+    padding-left: 30px;
+    transition: all .5s ease-in-out;
+    color: #3b3632;
+}
+
+form label i {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: #3b3632;
+}
+
+form label input:focus {
+    border-bottom: 2px solid #1c87e5;
+}
+
+form input[type="submit"] {
+    display: block;
+    background-color: #1c87e5;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    width: 275px;
+    margin: auto;
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px #1c87e5;
+}
+
+form a.forgot {
+    text-decoration: none;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #1c87e5;
+    text-align: left;
+    margin-left: 35px;
+}
+
+form .links {
+    background-color: #1c87e5;
+    color: #FFF;
+    margin-top: 30px;
+    padding: 20px 0 40px;
+}
+
+form .links h4 {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #d9eaf4;
+}
+
+form .links i {
+    margin-right: 15px;
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}

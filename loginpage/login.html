@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="./login.css">
+    <!-- <link rel="stylesheet" href="./login.css"> -->
+    <link rel="stylesheet" href="./newlogin.css">
     <!-- Add Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
@@ -26,7 +27,7 @@
     </style> -->
 </head>
 <body>
-    <h2>Login Page</h2>
+    <!-- <h2>Login Page</h2> -->
     <!-- Email/Password Login -->
     <!-- <form id="emailPasswordForm">
         <label for="email">Email:</label>
@@ -39,29 +40,115 @@
     </form> -->
 
 
-
+<!-- 
         <div class="container">
-            <div class="form-container sign-up-container" id="signup">
-                <form action="#" method="post">
-                    <h1>Create Account</h1>
-                    <input id="signup-name" type="name" placeholder="Name" />
-                    <input id="signup-username" type="text" placeholder="Username" />
-                    <input id="signup-email" type="email" placeholder="Email" />
-                    <input id="signup-password" type="password" placeholder="Password" />
-                    <button>Sign Up</button>
-                </form>
-            </div>
-            <div class="form-container sign-in-container" id="login-form">
-                <form action="#" method="post">
-                    <h1>Sign in</h1>
-                    <input id="email" type="email" placeholder="Email" />
-                    <input id="password" type="password" placeholder="Password" />
-                    <!-- <label for="remember-me">Remember Me: <input type="checkbox" id="remember-me"></label>                     -->
-                    <p hidden>Stay logged in?</p><input id="remember-me" type="checkbox" tabindex="0" name="loggedin" checked hidden></a>
-                    <a href="#">Forgot your password?</a>
-                    <button>Sign In</button>
-                </form>
-            </div>
+            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button>
+            <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">login</button>
+
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form id="signup" class="modal-content">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+      <label for="signup-name"><b>First name & Last name</b></label>
+      <input id="signup-name" type="text" placeholder="Enter First name & Last name" name="name">
+   
+      <label for="signup-username"><b>Username</b></label><br>
+      <input id="signup-username" type="text" placeholder="Enter Username" name="Username">
+
+      <label for="signup-email"><b>Email</b></label>
+      <input id="signup-email" type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input id="signup-password" type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input id="signup-password" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label>
+
+      <p>By creating an account you agree to our <a href="Terms&Privacy.html" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit" class="signupbtn">Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div> -->
+<!-- <div id="id02" class="modal">
+  
+    <form id="login-form" class="modal-content animate">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <img src="https://cdn.discordapp.com/attachments/716426929074602054/1192906229652144138/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.png?ex=65aac780&is=65985280&hm=30d9e1ebc03178695fc986bea05f75c74a878d0dff758e7df4f1b09b7abb1a74&" alt="Avatar" class="avatar" width="290px" height="290px">
+      </div>
+  
+      <div class="container">
+        <label for="uname"><b>Email</b></label>
+        <input id="email" type="text" placeholder="Enter Email" name="email" required>
+  
+        <label for="psw"><b>Password</b></label>
+        <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+          
+        <button type="submit">Login</button>
+        <label>
+          <input id="remember-me" type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+      </div>
+  
+      <div class="container" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw">Forgot <a href="#" id="reset-password-button">password?</a></span>
+      </div>
+    </form>
+  </div> -->
+
+
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm">
+        <label>
+            <!-- <i class="fa fa-user"></i> -->
+            <i class="fa fa-envelope"></i>
+            <input type="text" id="email"  placeholder="Username" required>
+        </label>
+        <label>
+            <i class="fa fa-lock"></i>
+            <input type="password" id="password" placeholder="Password" required>
+        </label>
+        <label>
+          <i class="fa fa-check"></i>
+          <input id="remember-me" type="checkbox" checked="checked" name="remember"> Remember me
+        </label>
+        <input type="submit" value="Login">
+        <a class="forgot" id="reset-password-button" href="#">Forgot Password?</a>
+        <a class="forgot" href="#" onclick="toggleForm()">Don't have an account? sign up</a>
+    </form>
+
+    <form id="signupForm" class="hidden">
+        <label>
+            <i class="fa fa-user"></i>
+            <input id="signup-username" type="text" placeholder="Username" required>
+        </label>
+        <label>
+            <i class="fa fa-envelope"></i>
+            <input type="text" id="signup-email" placeholder="Email" required>
+        </label>
+        <label>
+            <i class="fa fa-lock"></i>
+            <input type="password" id="signup-password" placeholder="Password" required>
+        </label>
+        <p>By creating an account you agree to our <a href="Terms&Privacy.html" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        <input type="submit" value="Sign Up">
+        <a class="forgot" href="#" onclick="toggleForm()">Already have an account? Login</a>
+    </form>
+</div>
         </div>
         <script src="./login.js"></script>
   

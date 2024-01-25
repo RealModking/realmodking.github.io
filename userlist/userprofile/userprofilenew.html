@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./userprofilenew.css">
+    <link rel="stylesheet" href="../../navbar.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    <div class="topnav" id="myTopnav">
+        <a href="index.html" class="active">Home</a>
+        <a href="./userlist/userlist.html">User list</a>
+        <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
+        <a href="./shop/shop.html">shop</a>
+        <div class="dropdown">
+          <button class="dropbtn">User Profile
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/profile/profile.html">Welcome:<div id="user-username"></div></a>
+            <a href="#">Message inbox</a>
+            <a href="#">Link 3</a>
+            <a href="#" onclick="signOut()" style="width:auto;">Sign Out</a>
+          </div>
+        </div>
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+</head>
+<body>
+    <div class="profile-card">
+        <img src="profile-image.jpg" alt="Profile Image" class="profile-image">
+        <div class="profile-info">
+          <h2 class="profile-name" id="user-username">John Doe</h2>
+          <p class="profile-position" id="user-Rank">Software Engineer</p>
+          <ul class="profile-links">
+            <li><a href="https://github.com/RealModking">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+<script src="../../navbar.js"></script>
+<script src="./userprofile.js"></script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include your Firebase configuration and Firebase SDK scripts here -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./shop.css">
+    <link rel="stylesheet" href="../navbar.css">
+    <script src="../navbar.js"></script>
+    <script src="./shopuser.js"></script>
+    <title>Vortex Network Shop</title>
+
+    <div class="topnav" id="myTopnav">
+        <a href="../index.html">Home</a>
+        <a href="../userlist/userlist.html" >User list</a>
+        <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
+        <a href="../shop/shop.html" class="active">shop</a>
+      
+        <div class="dropdown">
+          <button class="dropbtn">User Profile 
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="../profile/profile.html">Welcome:<div id="user-username"></div></a>
+            <a href="#">Message inbox</a>
+            <a href="#">Link 3</a>
+            <a href="#" onclick="signOut()" style="width:auto;">Sign Out</a>
+          </div>
+        </div> 
+        <a href="#about">About</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Shop</h1>
+        <input type="text" id="search-box" placeholder="Search products..." oninput="filterProducts()">
+        <div id="product-list">
+            <!-- Product list will be dynamically generated here -->
+        </div>
+
+        
+        <div id="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be dynamically generated here -->
+            </ul>
+            <p>Total: $<span id="total">0.00</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+        <div id="product-list"></div>
+    </div>
+
+    <script src="./shop.js"></script>
+</body>
+
+</html>

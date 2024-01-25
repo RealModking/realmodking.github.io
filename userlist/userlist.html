@@ -7,9 +7,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-database.js"></script>
     <link rel="stylesheet" href="./userlist.css">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="../navbar.css">
+    <script src="../navbar.js"></script>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User List</title>
     <!-- Include Firebase SDK and other dependencies -->
@@ -21,40 +25,27 @@
     <!-- Include user-list.js -->
     <script src="userlist.js"></script>
 
-
     <div class="topnav" id="myTopnav">
-        <a href="/index.html">Home</a>
-        <!-- <a href="/firends//friends.html">Friends</a> -->
-        <a href="userlist.html">User list</a>
-        <a href="/profile/profile.html">Welcome:<div id="user-username"></div></a>
-        
-        
-          <!-- <div class="login-container">
-              <form id="login-form">
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" required>
-                  <label for="password">Password:</label>
-                  <input type="password" id="password" required>
-                  <label for="remember-me">Remember Me:</label>
-                  <input type="checkbox" id="remember-me">                                
-                  <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
-              </form>
-          </div> -->
-          
-          <!-- <div class="login-container">
-              <form id="login-form" >
-                  <input type="email" id="email" placeholder="Email" required>
-                  <input type="password" id="password" placeholder="Password" required>
-                  <label for="remember-me" hidden>Remember Me:</label>
-                  <input type="checkbox" id="remember-me" checked hidden>                                
-                  <button type="submit">Login</button>
-              </form>
-            </div> -->
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-          <i class="fa fa-bars"></i>
-          
-        </a>
+        <a href="../index.html">Home</a>
+        <a href="userlist.html" class="active">User list</a>
+        <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
+        <!-- <a href="../shop/shop.html">shop</a> -->
+      
+        <div class="dropdown">
+          <button class="dropbtn">User Profile 
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="../profile/profile.html">Welcome:<div id="user-username"></div></a>
+            <a href="#">Message inbox</a>
+            <!-- <a href="#">Link 3</a> -->
+            <!-- <a href="#" onclick="signOut()" style="width:auto;">Sign Out</a> -->
+          </div>
+        </div> 
+        <!-- <a href="#about">About</a> -->
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
+
 </head>
 <body class="backcolor">
     <h1>User List</h1>

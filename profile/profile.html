@@ -11,9 +11,12 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="./profile.css">
+  <link rel="stylesheet" href="../navbar.css">
+  <script src="../navbar.js"></script>
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <!-- Include your app.js script here -->
 
@@ -21,36 +24,24 @@
 
 
   <div class="topnav" id="myTopnav">
-    <a href="/index.html">Home</a>
-    <!-- <a href="/firends/friends.html">Friends</a> -->
-    <a href="/userlist/userlist.html">User list</a>
-    <a href="">Welcome:<div id="user-username"></div></a>
+    <a href="../index.html">Home</a>
+    <a href="../userlist/userlist.html">User list</a>
+    <a herf="" id="adminButton" style="display: none;">Admin Only Button</a>
+    <!-- <a href="../shop/shop.html">shop</a> -->
 
-    <!-- <div class="login-container">
-              <form id="login-form">
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" required>
-                  <label for="password">Password:</label>
-                  <input type="password" id="password" required>
-                  <label for="remember-me">Remember Me:</label>
-                  <input type="checkbox" id="remember-me">                                
-                  <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
-              </form>
-          </div> -->
-
-    <!-- <div class="login-container">
-      <form id="login-form">
-        <input type="email" id="email" placeholder="Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <label for="remember-me">Remember Me:</label>
-        <input type="checkbox" id="remember-me" checked>
-        <button type="submit">Login</button>
-      </form>
-    </div> -->
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-      <i class="fa fa-bars"></i>
-
-    </a>
+    <div class="dropdown">
+      <button class="dropbtn">User Profile
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/profile/profile.html" class="active">Welcome:<div id="user-username"></div></a>
+        <a href="#">Message inbox</a>
+        <!-- <a href="#">Link 3</a> -->
+        <a href="#" onclick="signOut()" style="width:auto;">Sign Out</a>
+      </div>
+    </div>
+    <!-- <a href="#about">About</a> -->
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
   </div>
 </head>
 
@@ -68,30 +59,74 @@
   <div class="card">
     <div>
       <input type="file" id="profile-picture-input" style="display: none;" accept="image/*">
-      <img id="profile-picture" alt="Profile Picture" style="width:30%">
+      <!-- <img id="profile-picture" alt="Profile Picture" style="width:30%"> -->
 
     </div>
 
-    <p><strong>Username:</strong> <span id="uusername"></span></p>
-    <p><strong>Name:</strong> <span id="user-name"></span></p>
-    <p><strong>Email: the user email is hidden</strong> <span id="user-email" hidden></span></p>
-    <p><strong>User Id: the user id is hidden</strong> <span id="user-id" hidden></span></p>
-    <p><strong>Rank:</strong> <span id="user-rank"></span></p>
-    <p><strong>Title:</strong> <span id="user-title"></span></p>
-    <p><strong>Friends: <span id="friend-counter"></span></strong></p>
+    <p><strong><span id="status" class="statusui"></span></strong> </p>
+    <p><strong>Name: <span id="user-name"></span></strong></p>
+    <p><strong>Rank: <span id="user-rank"></span></strong></p>
+    <p><strong>Title: <span id="user-title"></span></strong></p>
+    <p><strong>Followers: <span id="user-Followers"></span></strong></p>
+    <p><strong>Following: <span id="user-followingCount"></span></strong></p>
     <p><strong>posts: <span id="user-posts"></span></strong></p>
+    <p><strong>points: <span id="user-points"></span></strong></p>
+    <p><strong>Bio: <span id="user-Bio"></span></strong></p>
 
     <div style="margin: 24px 0;" id="links">
-
     </div>
 
+      
+      <div id="profile-section">
+        
+        <button  id="ProfileModal-button" onclick="openChangeProfileModal()">Change Profile Picture</button>
+      </div>
+          <!-- <p><button id="pbutton">Contact</button></p> -->
+      <button  id="ProfileModal-button" onclick="openBiotextModal()">Change Bio text</button>
+    </div>
+
+  <!-- Modal for changing profile picture -->
+  <div id="changePictureModal">
+    <div class="modal-content">
+      <span id="closeModal" onclick="closeChangePictureModal()">&times;</span>
+      <h2>Your Purchased Items</h2>
+<!-- The dropdown menu for selecting titles -->
+<label for="titleSelect">Select a Purchased Item:</label>
+<select id="titleSelect">
+    <!-- Options will be dynamically added here -->
+</select>
+
+<!-- Title for the Purchased Items section -->
+<h2 id="purchasedItemsTitle">Purchased Items</h2>
+
+<!-- Content related to Purchased Items -->
+<div id="purchasedItemsContent">
+    <!-- Display purchased items here (initially empty) -->
+</div>
+</select>
+      <ul id="purchasedItemsListModal"><span  id="purchased-items"></span></ul>
+      <h2>Change Profile Picture</h2>
+      <p><strong>Email: the user email is hidden</strong> <span id="user-email" ></span></p>
+      <p><strong>User Id: the user id is hidden</strong> <span id="user-id" ></span></p>
+      <!-- Add your UI elements for changing profile picture here -->
+      
+      <img id="profile-picture" alt="Profile Picture" style="width:30%" style="height:30%">
+      <button onclick="submitProfilePicture()">Submit</button>
+    </div>
+  </div>
+  <!-- Modal for changing profile picture -->
+  <div id="BiotextModal">
+    <div class="modal-content">
+      <span id="closeModal" onclick="closeBiotextModal()">&times;</span>
+      <p id="user-bio"></p>
+      <textarea id="bio-input" placeholder="Enter your bio" minlength="1" maxlength="30"></textarea>
+      <button onclick="updateBio()">Save Bio</button>
+    </div>
+  </div>
 
 
 
 
-    <!-- <p><button id="pbutton">Contact</button></p> -->
-    <p><button id="settings-button" disabled>Edit settings</button></p>
-    <p><button id="submit-a-post"disabled >Submit A post</button></p>
   </div>
   <div class="profile_leftcol">
 

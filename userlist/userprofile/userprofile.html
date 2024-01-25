@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="uusername">User Profile:   </title>
+  <title id="username">User Profile:   </title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="./userprofile.css">
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
@@ -11,7 +11,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
- <script src="./userprofile.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./userprofilenew.css">
+ <script src="./userprofilenew.js"></script>
   <div class="topnav" id="myTopnav">
     <a href="/index.html">Home</a>
     <!-- <a href="/firends//friends.html">Friends</a> -->
@@ -29,9 +31,9 @@
               <input type="checkbox" id="remember-me">                                
               <button type="submit">Login</button> Rank, <span id="user-Rank"></span>!
           </form>
-      </div> -->
+      </div> 
       
-      <!-- <div class="login-container">
+       <div class="login-container">
           <form id="login-form" >
               <input type="email" id="email" placeholder="Email" required>
               <input type="password" id="password" placeholder="Password" required>
@@ -42,133 +44,53 @@
         </div>
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
-       -->
+       
     </a>
-  </div>
+  </div>    -->
 </head>
-
-
 <body>
-  <div class="container" id="user-details">
-    <!-- <div class="profile-header">
-      <div class="profile-img">
-        <img src="./bg.jpg" width="200" alt="Profile Image">
-      </div>
-      <div class="profile-nav-info">
-        <h3 class="user-name"></h3>
-        <div class="address">
-          <p id="state" class="state">New York,</p>
-          <span id="country" class="country">USA.</span>
+  <div class="profile-card">
+    <!-- <input type="file" id="profile-picture-input" style="display: none;" accept="image/*"> -->
+    <img id="profile-picture" class="profile-img" src="https://via.placeholder.com/150" width="150" height="150" alt="User Image">
+    <div class="profile-details">
+        <div class="username-status">
+            <span> </span>
+            <h2 id="status"></h2>
+            
         </div>
   
-      </div>
-      <div class="profile-option">
-        <div class="notification">
-          <i class="fa fa-bell"></i>
-           <span class="alert-message">3</span> 
-        </div>
-      </div>
+        
+        <!-- <p id="displayText">Display 2Text</p> -->
+        <p id="user-rank" class="profile-rank"></p>
+       
     </div>
-  
-    <div class="main-bd">
-      <div class="left-side">
-        <div class="profile-side">
-          <p class="mobile-no"><i class="fa fa-phone"></i> +23470xxxxx700</p>
-          <p class="user-mail"><i class="fa fa-envelope"></i> <span id=""></span></p>
-          <div class="user-bio">
-            <h3>Bio</h3>
-            <p class="bio">
-              Lorem ipsum dolor sit amet, hello how consectetur adipisicing elit. Sint consectetur provident magni yohoho consequuntur, voluptatibus ghdfff exercitationem at quis similique. Optio, amet!
-            </p>
-          </div>
-          <div class="profile-btn">
-            <button class="chatbtn" id="chatBtn"><i class="fa fa-comment"></i> Chat</button>
-            <button class="createbtn" id="Create-post"><i class="fa fa-plus"></i> Create</button>
-          </div>
-          <div class="user-rating">
-            <h3 class="rating">4.5</h3>
-            <div class="rate">
-              <div class="star-outer">
-                <div class="star-inner">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-              </div>
-              <span class="no-of-user-rate"><span>123</span>&nbsp;&nbsp;reviews</span>
-            </div>
-  
-          </div>
-        </div>
-  
-      </div>
-      <div class="right-side">
-  
-        <div class="nav">
-          <ul>
-            <li onclick="tabs(0)" class="user-post active">Posts</li>
-            <li onclick="tabs(1)" class="user-review">Reviews</li>
-            <li onclick="tabs(2)" class="user-setting"> Settings</li>
-          </ul>
-        </div>
-        <div class="profile-body">
-          <div class="profile-posts tab">
-            <h1>Your Post</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quia sunt itaque ut libero cupiditate ullam qui velit laborum placeat doloribus, non tempore nisi ratione error rem minima ducimus. Accusamus adipisci quasi at itaque repellat sed
-              magni eius magnam repellendus. Quidem inventore repudiandae sunt odit. Aliquid facilis fugiat earum ex officia eveniet, nisi, similique ad ullam repudiandae molestias aspernatur qui autem, nam? Cupiditate ut quasi iste, eos perspiciatis maiores
-              molestiae.</p>
-          </div>
-
-          <div class="profile-reviews tab">
-            <h1>User reviews</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam pariatur officia, aperiam quidem quasi, tenetur molestiae. Architecto mollitia laborum possimus iste esse. Perferendis tempora consectetur, quae qui nihil voluptas. Maiores debitis
-              repellendus excepturi quisquam temporibus quam nobis voluptatem, reiciendis distinctio deserunt vitae! Maxime provident, distinctio animi commodi nemo, eveniet fugit porro quos nesciunt quidem a, corporis nisi dolorum minus sit eaque error
-              sequi ullam. Quidem ut fugiat, praesentium velit aliquam!</p>
-          </div>
-          <div class="profile-settings tab">
-            <div class="account-setting">
-              <h1>Acount Setting</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum, facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo velit omnis, debitis maxime, sequi
-                animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim quam voluptatum vel debitis
-                nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-  </div>
-
-    <!-- <div id="verifiedIcon" style="display: none;">
-     Display verified icon here 
-    <img src="verified_icon.png" alt="Verified">
-  </div>
-
-  <div id="unverifiedIcon" style="display: none;">
-     Display unverified icon here 
-    <img src="unverified_icon.png" alt="Not Verified">
-  </div> -->
+    <p id="cash"></p>
+    <p class="profile-posts">Posts: <span id="user-posts"></span></p>
+    <p class="profile-friends">Friends: 15</p>
+    <!-- <p id="status"></p> -->
+    <!-- <p id="myDIV" STYLE="display:none">Your userId: kDnFgSRL5AYunX5z8DfqvRCfRzf1</p> -->
+    <!-- <a href="./editprofile.html"><button  class="edit-btn">Edit Profile</button></a> -->
+    <!-- <button onclick="myFunction()" class="edit-btn">Show your userId</button> -->
+    <!-- <a href="./editprofile.html">test</a> -->
+    <div class="profile-container">
+        <!-- <img id="profile-picture" src="default-profile.png" alt="Profile Picture"> -->
+        <button id="edit-button">Edit</button>
+    </div>
+    
+    <div class="edit-menu" id="edit-menu">
+        <!-- <img id="edit-profile-picture" src="default-profile.png">
+        <input type="file" id="file-input"> -->
+        <input type="file" id="file-input"  accept="image/*">
+        <img id="edit-profile-picture" alt="it Profile Picture" style="width: 100px; border-radius: 50%; height: 100px;" src="https://firebasestorage.googleapis.com/v0/b/login-b6f02.appspot.com/o/profilePictures%2FujixagtNCWgx7JB1xADtryLucCC2%2Fcyberpunk-x-batman-pfp-1.png?alt=media&amp;token=3b2e9130-9fd8-4008-8986-18ca36889376" title="Edit Profile Picture">
+      
+        <button id="save-button">Save</button>
+    </div>  
+    <div>
+        <H2>Bio Text</H2>
+        <p id="biotext"></p>
+    </div>
+    </div>
 </body>
-<!-- <body class="backcolor">
-
-
-
-  
-<div id="user-profile">
-    <h2 id="followersCount">User Profile</h2>
-   
-    
-
-
-    
-    <div id="user-details"></div>
-    Inside userprofile.html  
-      <button id="followButton">Follow</button> 
-  Your HTML  
- <button id="sendFriendRequestButton">Send Friend Request</button> 
-</div>
-</body> -->
 </html>
 
 

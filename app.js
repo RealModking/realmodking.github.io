@@ -8,7 +8,7 @@ var firebaseConfig = {
     messagingSenderId: "885646037965",
     appId: "1:885646037965:web:8c53ad60166c07b7662a84",
     measurementId: "G-K783G89QF5"
-  };
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -58,7 +58,7 @@ async function loginUser(email, password, rememberMe) {
     try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
         const user = userCredential.user;
-
+        
         // Store user authentication status in sessionStorage
         sessionStorage.setItem("userAuthenticated", "true");
 
@@ -66,7 +66,7 @@ async function loginUser(email, password, rememberMe) {
         if (rememberMe) {
             sessionStorage.setItem("userId", user.uid);
         }
-
+   
         // Reload the page after successful login
         // location.reload();
         alert(`Login successful ${userData.name}`);
@@ -78,6 +78,35 @@ async function loginUser(email, password, rememberMe) {
         return { success: false, error: error.message };
     }
 }
+
+
+// Function to check if a user is banned
+async function isUserBanned(userId) {
+    try {
+        const userDoc = await firebase.firestore().collection("bannedUsers").doc(userId).get();
+
+        return userDoc.exists; // Return true if the user is banned, false otherwise
+    } catch (error) {
+        console.error("Error checking if user is banned:", error);
+        return false; // Assume not banned in case of an error
+    }
+}
+
+// Example usage
+const userId = sessionStorage.getItem("userId"); // Replace with the actual user ID
+
+isUserBanned(userId).then(isBanned => {
+    if (isBanned) {
+        console.log("User is banned.");
+        // Implement logic for handling a banned user (e.g., display a message, restrict access)
+        window.location.href = './accountdisable/accountdisable.html'
+    } else {
+        console.log("User is not banned.");
+        // Implement logic for handling a non-banned user
+    }
+});
+
+
 
 
 // Function to check authentication status on page load
@@ -183,10 +212,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Updated submitPost function with rating integration
+// Function to determine if a file is an image
+function isImage(file) {
+    return file.type.startsWith('image/');
+}
+
+// Function to determine if a file is a video
+function isVideo(file) {
+    return file.type.startsWith('video/');
+}
+
 async function submitPost() {
     const postContent = document.getElementById("post-content").value;
     const postTitle = document.getElementById("post-title").value;
-    const imageFile = document.getElementById("post-image-file").files[0];
+    const mediaFile = document.getElementById("post-media-file").files[0]; // Rename to post-media-file
     const user = auth.currentUser;
 
     if (user && postContent.trim() !== "") {
@@ -201,12 +240,12 @@ async function submitPost() {
             }
 
             const timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            let imageUrl = "";
+            let mediaUrl = "";
 
-            if (imageFile) {
-                const storageRef = firebase.storage().ref(`images/${user.uid}/${timestamp}_${imageFile.name}`);
-                await storageRef.put(imageFile);
-                imageUrl = await storageRef.getDownloadURL();
+            if (mediaFile) {
+                const storageRef = firebase.storage().ref(`media/${user.uid}/${timestamp}_${mediaFile.name}`);
+                await storageRef.put(mediaFile);
+                mediaUrl = await storageRef.getDownloadURL();
             }
 
             const userDocRef = db.collection("users").doc(user.uid);
@@ -216,7 +255,8 @@ async function submitPost() {
 
             // Update user's post count
             await userDocRef.update({
-                postCount: firebase.firestore.FieldValue.increment(1)
+                postCount: firebase.firestore.FieldValue.increment(1),
+                balance: firebase.firestore.FieldValue.increment(1)
             });
 
             // Generate a random post ID
@@ -228,7 +268,7 @@ async function submitPost() {
                 userId: user.uid,
                 userName: userName,
                 timestamp: timestamp,
-                imageUrl: imageUrl,
+                mediaUrl: mediaUrl,
                 postId: postId
             });
 
@@ -238,7 +278,7 @@ async function submitPost() {
 
             document.getElementById("post-content").value = "";
             document.getElementById("post-title").value = "";
-            document.getElementById("post-image-file").value = "";
+            document.getElementById("post-media-file").value = "";
             // Your existing post submission logic
         } catch (error) {
             console.error("Error adding post: ", error);
@@ -247,6 +287,7 @@ async function submitPost() {
         alert("You must log in to post."); // You can replace this with a more user-friendly notification
     }
 }
+
 
 // Function to generate a random post ID
 function generateRandomPostId(length = 20) {
@@ -263,20 +304,20 @@ function generateRandomPostId(length = 20) {
 function containsBlacklistedWords(content) {
     // Replace this array with your actual list of blacklisted words
     const blacklist = [
-    "word1",
-    "word2",
-    "word3",
-    ",",
-    "<",
-    ">",
-    "arse",
-    "ass",
-    "asshole",
-    "homosexual"
-    
+        "word1",
+        "word2",
+        "word3",
+        ",",
+        "<",
+        ">",
+        "arse",
+        "ass",
+        "asshole",
+        "homosexual"
 
 
-];
+
+    ];
     // Convert content to lowercase for case-insensitive matching
     const lowercaseContent = content.toLowerCase();
 
@@ -405,7 +446,7 @@ function highlightStars(starsContainer, rating) {
     }
 }
 
-// Update the blog post creation to use the new function
+
 function displayPosts() {
     const blogPostsContainer = document.getElementById("blog-posts");
 
@@ -420,29 +461,28 @@ function displayPosts() {
 
                 const blogPost = document.createElement("div");
                 blogPost.classList.add("blog-post");
+
+
                 blogPost.innerHTML = `
-                    <h3 class="title">${post.title || "Untitled"}</h3> 
-                    <p>${post.content}</p>                    
-                    <small>Posted by <a class="links" href="../userlist/userprofile/userprofile.html?uid=${post.userId}"> @${post.userName || "Unknown User"} </a> at ${timestamp}</small>                    
+                    <img class="User Profile Picture" id="userProfilePicture">
+                    <h3 class="title">${post.title || "Untitled"}</h3>
+                    <p>${post.content || "Untitled"}</p>
+                    <div class="container">
+                    <iframe width="320" height="180" src="${post.mediaUrl || "https://firebasestorage.googleapis.com/v0/b/login-b6f02.appspot.com/o/images%2FujixagtNCWgx7JB1xADtryLucCC2%2F%5Bobject%20Object%5D_Screenshot%202023-06-20%20163053.png?alt=media&token=eb50e1f9-3702-441f-9bd0-f7d6ffc4657e"}"  frameBorder="0" scrolling="no" allowfullscreen="true" kwframeid="1" ></iframe>
+                    </div>
+                    <br>
+                    <small>PostId: ${post.postId}</small>
+                    <small>Posted by <a class="links" href="./userlist/userlist.html"> @${post.userName || "Unknown User"} </a> at ${timestamp}</small>
                 `;
+                // <small>Posted by <a class="links" href="../userlist/userprofile/userprofile.html?uid=${post.userId}"> @${post.userName || "Unknown User"} </a> at ${timestamp}</small>
+                if (post.user && post.user.profilePictureUrl) {
+                    const userProfilePicture = document.createElement("img");
+                    userProfilePicture.src = post.user.profilePictureUrl;
+                    userProfilePicture.alt = "User Profile Picture";
+                    userProfilePicture.classList.add("user-profile-picture");
 
-
-                // Check if the rating property is defined and not null <img class="fakeimg" src="${post.imageUrl}" alt="Post Image">
-                if (typeof post.rating === 'number' && !isNaN(post.rating)) {
-                    // Create a rating element
-                    const ratingElement = document.createElement("div");
-                    ratingElement.classList.add("rating");
-
-                    // Add star icons based on the rating value
-                    for (let i = 0; i < post.rating; i++) {
-                        const starIcon = document.createElement("span");
-                        starIcon.innerHTML = "★"; // You can use an actual star icon here
-
-                        ratingElement.appendChild(starIcon);
-                    }
-
-                    // Append the rating element to the blog post
-                    blogPost.appendChild(ratingElement);
+                    // Append the user profile picture element to the blog post
+                    blogPost.insertBefore(userProfilePicture, blogPost.firstChild);
                 }
 
                 // Append the blog post to the container
@@ -450,17 +490,10 @@ function displayPosts() {
             });
         });
 }
-
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     // Call the displayPosts function after the DOM is fully loaded
     displayPosts();
-  });
+});
 
 // const userUsernameElement = document.getElementById("user-username");
 
@@ -578,39 +611,39 @@ submitRating(postId, rating);
 
 
 
-        // Function to generate star rating HTML
-        function generateStarRating(rating) {
-            const maxRating = 5;
-            const starCount = Math.round(rating); // Assuming rating is out of 5
+// Function to generate star rating HTML
+function generateStarRating(rating) {
+    const maxRating = 5;
+    const starCount = Math.round(rating); // Assuming rating is out of 5
 
-            // Create HTML for star rating
-            let starsHtml = "";
-            for (let i = 0; i < maxRating; i++) {
-                if (i < starCount) {
-                    starsHtml += "★"; // Solid star for rated
-                } else {
-                    starsHtml += "☆"; // Empty star for not rated
-                }
-            }
-
-            return starsHtml;
+    // Create HTML for star rating
+    let starsHtml = "";
+    for (let i = 0; i < maxRating; i++) {
+        if (i < starCount) {
+            starsHtml += "★"; // Solid star for rated
+        } else {
+            starsHtml += "☆"; // Empty star for not rated
         }
+    }
 
-        // Function to create a post element
-        function createPostElement(post) {
-            const postElement = document.createElement("div");
-            postElement.classList.add("post");
+    return starsHtml;
+}
 
-            // Other post details
-            postElement.innerHTML = `
+// Function to create a post element
+function createPostElement(post) {
+    const postElement = document.createElement("div");
+    postElement.classList.add("post");
+
+    // Other post details
+    postElement.innerHTML = `
                 <h2>${post.title}</h2>
                 <p>${post.content}</p>
                 <p>Posted by: ${post.userName}</p>
                 <p>Rating: ${generateStarRating(post.rating)}</p>
             `;
 
-            return postElement;
-        }
+    return postElement;
+}
 
 // // Get the modal
 // var modal = document.getElementById('id01');
@@ -626,11 +659,28 @@ function signOut() {
     firebase.auth().signOut()
         .then(() => {
             console.log('User signed out successfully');
-            
+
             // Clear user data from session storage
             // sessionStorage.removeItem('userId');
             sessionStorage.removeItem('userAuthenticated');
-            sessionStorage.removeItem('IsThisFirstTime_Log_From_LiveServer')
+            sessionStorage.removeItem('IsThisFirst Time_Log_From_LiveServer')
+
+            // Fetch online toggle from Firebase
+            var onlineToggleRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/online');
+            onlineToggleRef.once('value').then(function (snapshot) {
+                var onlineToggle = snapshot.val();
+
+                // Check if the user was online before signing out
+                if (onlineToggle) {
+                    // Set the user's online status to offline in Firebase
+                    var userStatusRef = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/online');
+                    userStatusRef.set({
+                        state: 'offline',
+                        lastChanged: firebase.database.ServerValue.TIMESTAMP
+                    });
+                }
+            });
+
             window.location.href = "index2.html";
         })
         .catch((error) => {
@@ -660,13 +710,14 @@ function signOut() {
 //             console.error('Error sending password reset email:', error);
 //         });
 // });
-document.getElementById('adminButton').addEventListener("click", function() {
+document.getElementById('adminButton').addEventListener("click", function () {
     checkIfAdmin()
         .then(isAdmin => {
             if (isAdmin) {
                 window.location.href = "../admin/admin.html";
             } else {
                 console.log("You do not have admin privileges.");
+                window.location.href = 'index.html';
                 // Optionally, you can show an error message or handle it in another way.
             }
         })
@@ -683,7 +734,7 @@ function checkIfAdmin() {
 
         // Placeholder logic, replace with your actual implementation
         // For example, check if the user ID is present in an "admins" collection
-        const adminRef = firebase.firestore().collection('admins').doc(currentUserId);
+        const adminRef = firebase.firestore().collection('users').doc(currentUserId);
 
         adminRef.get()
             .then(doc => {
@@ -697,33 +748,69 @@ function checkIfAdmin() {
     });
 }
 
-// Show or hide the admin button based on the user's role (admin or not)
-const adminButton = document.getElementById('adminButton');
+document.addEventListener('DOMContentLoaded', function () {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in, get the user object
+            const uid = user.uid;
 
-// Check if the user is authenticated
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        // User is signed in
-        adminButton.style.display = 'block';
-    } else {
-        // User is signed out
-        adminButton.style.display = 'none';
-    }
+            // Access the user's role from Firestore
+            const userRef = firebase.firestore().collection('users').doc(uid);
+
+            userRef.get().then((doc) => {
+                if (doc.exists) {
+                    const userRole = doc.data().role;
+
+                    // Show the admin button only to admins
+                    if (userRole === 'admin') {
+                        document.getElementById('adminButton').style.display = 'block';
+                    }
+                } else {
+                    window.location.href = 'index.html';
+                    console.log("You do not have admin privileges.");
+                    console.log('User document does not exist');
+                }
+            }).catch((error) => {
+                console.error('Error getting user document:', error);
+            });
+        } else {
+            // User is signed out, handle accordingly
+            console.log('User is not signed in.');
+        }
+    });
 });
 
 
-let currentTab = 'allPosts';
+// let currentTab = 'allPosts';
+// function openTab(tabName) {
+//     // Hide all tab content
+//     const tabContents = document.getElementsByClassName('tab-content');
+//     for (const content of tabContents) {
+//         content.style.display = 'none';
+//     }
 
-function openTab(tabId) {
-  document.getElementById(currentTab).classList.remove('active-tab');
-  document.getElementById(tabId).classList.add('active-tab');
-  currentTab = tabId;
-      // Show the selected tab
+//     // Show the selected tab content
+//     const selectedTab = document.getElementById(tabName);
+//     selectedTab.style.display = 'block';
+//       document.getElementById(currentTab).classList.remove('active-tab');
+//   document.getElementById(tabName).classList.add('active-tab');
+//   currentTab = tabName;
+// }
 
-}
 
 
-  // Check if user is logged in
+// let currentTab = 'allPosts';
+
+// function openTab(tabId) {
+//   document.getElementById(currentTab).classList.remove('active-tab');
+//   document.getElementById(tabId).classList.add('active-tab');
+//   currentTab = tabId;
+//       // Show the selected tab
+
+// }
+
+
+// Check if user is logged in
 const isLoggedIn = sessionStorage.getItem('userAuthenticated');
 
 // If not logged in, redirect to the login page
@@ -731,28 +818,97 @@ if (!isLoggedIn) {
     window.location.href = '../loginpage/login.html'; // Replace with your login page URL
 }
 
-   
 
-    const bannerRef = firebase.firestore().collection('bannerText').doc('test');
 
-    bannerRef.get('text').then((doc) => {
+const bannerRef = firebase.firestore().collection('bannerText').doc('test');
+
+bannerRef.get('text').then((doc) => {
     if (doc.exists) {
         const text = doc.data(); // Access the data of the document
         const bannerTextElement = document.getElementById('bannerText');
         bannerTextElement.textContent = text.bannerText;
-      
-      
+
+
     } else {
         console.log('No such document!');
     }
-    }).catch((error) => {
+}).catch((error) => {
     console.error('Error getting document:', error);
+});
+
+// Function to update banner text
+function updateBanner(text) {
+    const bannerTextElement = document.getElementById('bannerText');
+    bannerTextElement.textContent = text;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const openModalButton = document.getElementById('openModalButton');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const modal = document.getElementById('myModal');
+
+    openModalButton.addEventListener('click', function () {
+        modal.style.display = 'block';
     });
 
-    // Function to update banner text
-    function updateBanner(text) {
-      const bannerTextElement = document.getElementById('bannerText');
-      bannerTextElement.textContent = text;
-    }
+    closeModalButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
 
- 
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('showrules');
+    const displayText = document.getElementById('therules');
+
+    toggleButton.addEventListener('click', function () {
+        // Toggle the visibility of the text on each click
+        displayText.style.display = (displayText.style.display === 'none') ? 'block' : 'none';
+    });
+});
+
+
+
+// Function to create a user card
+function createUserCard(user) {
+    const userCard = document.createElement("div");
+    userCard.innerHTML = `
+        <p>Username: ${user.username}</p>
+        <p>Bio: ${user.bio}</p>
+        <p>Followers: ${user.followersCount}</p>
+        <br>
+        <!-- Add other user information as needed -->
+    `;
+    return userCard;
+}
+
+// Fetch and display popular users
+function displayPopularUsers() {
+    const popularUsersContainer = document.getElementById("popular-users");
+
+    db.collection("users")
+        .orderBy("followersCount", "desc")
+        .limit(3)
+        .get()
+        .then(snapshot => {
+            popularUsersContainer.innerHTML = ""; // Clear previous content
+
+            snapshot.forEach(doc => {
+                const user = doc.data();
+                const userCard = createUserCard(user);
+                popularUsersContainer.appendChild(userCard);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching popular users:", error);
+        });
+}
+
+// Call the function to display popular users
+displayPopularUsers();
+

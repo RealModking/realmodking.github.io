@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-database.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="userprofile2.css">
+    <title>User Profile</title>
+    
+</head>
+<body>
+    <div class="profile-card">
+        <!-- <input type="file" id="profile-picture-input" style="display: none;" accept="image/*"> -->
+        <img id="profile-picture" class="profile-img" src="https://via.placeholder.com/150" width="150" height="150" alt="User Image">
+        <div class="profile-details">
+            <div class="username-status">
+                <span> </span>
+                <h2 id="status"></h2>
+                
+            </div>
+      
+            
+            <!-- <p id="displayText">Display 2Text</p> -->
+            <p id="user-rank" class="profile-rank"></p>
+           
+        </div>
+        <p id="cash"></p>
+        <p class="profile-posts">Posts: <span id="user-posts"></span></p>
+        <p class="profile-friends">Friends: 15</p>
+        <!-- <p id="status"></p> -->
+        <p id="myDIV" STYLE="display:none">Your userId: kDnFgSRL5AYunX5z8DfqvRCfRzf1</p>
+        <a href="./editprofile.html"><button  class="edit-btn">Edit Profile</button></a>
+        <button onclick="myFunction()" class="edit-btn">Show your userId</button>
+        <!-- <a href="./editprofile.html">test</a> -->
+        <div class="profile-container">
+            <!-- <img id="profile-picture" src="default-profile.png" alt="Profile Picture"> -->
+            <button id="edit-button">Edit</button>
+        </div>
+        
+        <div class="edit-menu" id="edit-menu">
+            <!-- <img id="edit-profile-picture" src="default-profile.png">
+            <input type="file" id="file-input"> -->
+            <input type="file" id="file-input"  accept="image/*">
+            <img id="edit-profile-picture" alt="it Profile Picture" style="width: 100px; border-radius: 50%; height: 100px;" src="https://firebasestorage.googleapis.com/v0/b/login-b6f02.appspot.com/o/profilePictures%2FujixagtNCWgx7JB1xADtryLucCC2%2Fcyberpunk-x-batman-pfp-1.png?alt=media&amp;token=3b2e9130-9fd8-4008-8986-18ca36889376" title="Edit Profile Picture">
+          
+            <button id="save-button">Save</button>
+        </div>  
+        <div>
+            <H2>Bio Text</H2>
+            <p id="biotext"></p>
+        </div>
+        </div>
+</body>
+<script>
+
+// Replace with your Firebase configuration
+var firebaseConfig = {
+    apiKey: "AIzaSyCDB471aXGIg3bPnhINno3pDWF9R4IaRL8",
+    authDomain: "login-b6f02.firebaseapp.com",
+    databaseURL: "https://login-b6f02-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "login-b6f02",
+    storageBucket: "login-b6f02.appspot.com",
+    messagingSenderId: "885646037965",
+    appId: "1:885646037965:web:8c53ad60166c07b7662a84",
+    measurementId: "G-K783G89QF5"
+  };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+
+
+
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+// Get the user data from Firestore
+async function getUserData() {
+    firebase.auth().onAuthStateChanged(async function(user) {
+       if (user) {
+         // User is signed in
+         try {
+           const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+           const verified = userDoc.data().verified;
+           const userData = userDoc.data();
+           console.log(verified); // Log the verified status to the console
+           document.getElementById('status').innerHTML = verified ? `${userData.name}/${userData.username} <i class="fa fa-check"></i>` :`${userData.name}/${userData.username}`; // Update the HTML element with the id 'status'
+         } catch (error) {
+           console.error(error); // Log any errors to the console
+         }
+       } else {
+         // No user is signed in
+         console.log('No user is signed in');
+       }
+    });
+   }
+   
+   // Call the function to get the user data
+   getUserData();
+
+
+// Get references to the authentication service
+var auth = firebase.auth();
+console.log("Firebase initialized successfully");
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", async function () {
+        // Add an authentication state change listener
+        firebase.auth().onAuthStateChanged(async function (user) {
+            if (user) {
+                // User is logged in, fetch and display the user's profile
+                //const userNameElement = document.getElementById("user-name");
+                //const userEmailElement = document.getElementById("user-email");
+                //const userIdElement = document.getElementById("user-id");
+                const userRankElement = document.getElementById("user-rank");
+                //const userUsernameElement = document.getElementById("username");
+                //const UserUsernameElement = document.getElementById("uusername");
+                const profilePictureElement = document.getElementById("profile-picture");
+                const usertitleElement = document.getElementById("user-title");
+                const postsContainer = document.getElementById("user-posts");
+                const biotextcontainer = document.getElementById("biotext");
+                const cashtextcontainer = document.getElementById("cash");
+    
+                try {
+                    // Fetch user data from Firestore based on user's UID
+                    const userDoc = await firebase.firestore().collection("users").doc(user.uid).get();
+    
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                       // userNameElement.textContent = userData.name || "Unknown";
+                        //userEmailElement.textContent = user.email || "Unknown Email";
+                        //userIdElement.textContent = user.uid || "Unknown id";
+                        userRankElement.textContent = userData.roles || "Unknown Rank";
+                        //userUsernameElement.textContent = `User Profile: ${userData.username}` || "Unknown Username";
+                       // UserUsernameElement.textContent = `${userData.name}` || "Unknown Username";
+                        //usertitleElement.textContent = userData.tag || "Unknown tag";
+                        postsContainer.textContent = userData.postCount || "No posts found.";
+                        biotextcontainer.textContent = userData.bio || "Sorry you don't have a bio yet."
+                        cashtextcontainer.textContent = `Points: ${userData.balance}` || "Sorry you don't have any cash yet."
+                        
+    
+                        // Display profile picture with rounded corners
+                        const profilePictureUrl = userData.profilePictureUrl;
+                        if (profilePictureElement && profilePictureUrl) {
+                            profilePictureElement.src = profilePictureUrl;
+                            profilePictureElement.style.borderRadius = "50%";
+                            profilePictureElement.style.width = "150px";
+                            profilePictureElement.style.height = "150px";
+    
+                            profilePictureElement.title = "Edit Profile Picture";
+                            // Add event listener to the profile picture for changing the picture
+
+                        }
+                    } 
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                }
+            } else {
+                // User is not logged in, redirect to the login page or handle accordingly
+                window.location.href = "login.html";
+            }
+        });
+    });
+// Add event listener to the file input for handling file selection
+const profilePictureInput = document.getElementById("profile-picture-input");
+if (profilePictureInput) {
+    profilePictureInput.addEventListener("change", handleProfilePictureChange);
+}
+
+    async function handleProfilePictureChange(event) {
+        const user = firebase.auth().currentUser;
+        const file = event.target.files[0];
+    
+        if (user && file) {
+            try {
+                const storageRef = firebase.storage().ref(`profilePictures/${user.uid}/${file.name}`);
+                await storageRef.put(file);
+                const imageUrl = await storageRef.getDownloadURL();
+    
+                // Update the user's profile picture URL in Firestore
+                await firebase.firestore().collection("users").doc(user.uid).update({
+                    profilePictureUrl: imageUrl,
+                });
+    
+                // Display the updated profile picture
+                const profilePictureElement = document.getElementById("profile-picture");
+                if (profilePictureElement) {
+                    profilePictureElement.src = imageUrl;
+                }
+            } catch (error) {
+                console.error("Error updating profile picture:", error);
+            }
+        }
+    }
+
+    //document.getElementById("settings-button").addEventListener("click", function() {
+        // Redirect the user to the user settings page
+        //window.location.href = "./userprofilesettings/usersettings.html"; // Replace with the actual path of your settings page
+    //});
+
+    //document.getElementById("submit-a-post").addEventListener("click", function() {
+/// Redirect the user to the user settings page
+        //window.location.href = "./userprofilepostbox/userprofilepostbox.html"; // Replace with the actual path of your settings page
+    //});
+</script>
+
+
+</html>
+

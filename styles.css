@@ -128,10 +128,10 @@ button {
 }
 
 .blog-post {
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   padding: 16px;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
 }
@@ -166,7 +166,7 @@ body {
   padding: 30px;
   font-size: 40px;
   text-align: center;
-  background: white;
+  background: rgb(37, 29, 29);
 }
 
 /* Create two unequal columns that floats next to each other */
@@ -192,7 +192,7 @@ body {
 
 /* Add a card effect for articles */
 .card {
-   background-color: white;
+   background-color: rgb(37, 29, 29);
    padding: 20px;
    margin-top: 20px;
 }
@@ -208,7 +208,7 @@ body {
 .footer {
   padding: 20px;
   text-align: center;
-  background: #ddd;
+  background: rgb(37, 29, 29);
   margin-top: 20px;
 }
 
@@ -220,33 +220,7 @@ body {
   }
 }
 
-.topnav {
-    background-color: #000000;
-    overflow: hidden;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  /* Add an active class to highlight the current page */
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
+ 
   
   /* Hide the link that should open and close the topnav on small screens */
   .topnav .icon {
@@ -255,54 +229,11 @@ body {
 
 
   .links {
-    color: Blue;
+    color: rgb(0, 255, 64);
   }
 
 
-  .topnav .login-container {
-    float: right;
-  }
-  
-  .topnav input[type=text] {
-    padding: 6px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-    width:120px;
-  }
-  
-  .topnav .login-container button {
-    float: right;
-    padding: 6px 10px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background-color: #555;
-    color: white;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .topnav .login-container button:hover {
-    background-color: green;
-  }
-  
-  @media screen and (max-width: 600px) {
-    .topnav .login-container {
-      float: none;
-    }
-    .topnav a, .topnav input[type=text], .topnav .login-container button {
-      float: none;
-      display: block;
-      text-align: left;
-      width: 100%;
-      margin: 0;
-      padding: 14px;
-    }
-    .topnav input[type=text] {
-      border: 1px solid #ccc;  
-    }
-  }
+
 
   .user-image {
     width: 30px; /* Adjust the width as needed */
@@ -320,31 +251,55 @@ body {
 }
 
 
-    /* Style the tabs */
-    .tab {
-      display: none;
-    }
-
-    /* Style the tab content */
-    .tab-content {
-      display: none;
-    }
-
-    /* Show the active tab content */
-    .active-tab {
-      display: block;
-    }
-
-
-
-/* Style the tab content */
-.tab-content {
-  display: none;
-  word-wrap: break-word; /* Add this line to enable word wrap */
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
+.tab {
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 60%;
+  margin-top: 10px;
+}
+
+.tab-content h2 {
+  color: #3498db;
+}
+
+
+    #status {
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .online {
+      color: green;
+    }
+
+    .offline {
+      color: red;
+    }
+
+
 #banner {
-  background-color: #f2f2f2;
+  background-color: rgb(37, 29, 29);
   padding: 20px;
   text-align: center;
   font-size: 9px; /* You can adjust this value to your preference */
@@ -354,34 +309,71 @@ body {
 
 
 
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.textbox-container {
+  position: relative;
+  width: 300px;
+}
+
+.modern-textbox {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  outline: none;
+  font-size: 16px;
+}
+
+.modern-textbox:focus {
+  border-color: #2ecc71;
+}
+
+#postimage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+#therules {
+  text-align: center;
+}
 
 
 
 
 
+.button-text {
+  display: none;
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+}
 
+iframe:focus {
+  outline: none;
+}
 
+iframe[seamless] {
+  display: block;
+}
 
+.container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#myiframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

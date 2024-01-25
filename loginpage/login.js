@@ -159,13 +159,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 });
 
+function toggleForm() {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
 
-
+    loginForm.classList.toggle('hidden');
+    signupForm.classList.toggle('hidden');
+}
 
 
 
 // Example usage during login
-document.getElementById("login-form").addEventListener("submit", async function (event) {
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     var email = document.getElementById("email").value;
@@ -189,11 +194,25 @@ document.getElementById("login-form").addEventListener("submit", async function 
 });
 
 
+const resetPasswordButton = document.getElementById('reset-password-button');
+resetPasswordButton.addEventListener('click', () => {
+  const email = document.getElementById('email').value;
+
+  firebase.auth().sendPasswordResetEmail(email)
+    .then(() => {
+      // Password reset email sent
+      alert('Password reset email sent');
+    })
+    .catch((error) => {
+      // Error occurred
+      console.error(error);
+      alert(error.message);
+    });
+});
 
 
 
-
-document.getElementById("signup").addEventListener("submit", async function (event) {
+document.getElementById("signupForm").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     var email = document.getElementById("signup-email").value;
@@ -203,13 +222,13 @@ document.getElementById("signup").addEventListener("submit", async function (eve
 
     try {
         // Create user in Firebase Authentication
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await auth.createUserWithEmailAndPassword( email , password);
 
         // Get the user ID
         const userId = userCredential.user.uid;
 
         // Add UID, name, roles, and default profile picture URL to the user document in Firestore
-        const profilePictureUrl = "https://cdn.discordapp.com/attachments/1132871893045751930/1186473953770868878/Screenshot_2022-06-11_192629.png?ex=659360fa&is=6580ebfa&hm=3754c9ccb88215ef3570a2fe2c51f5cb91ae393602321a9e67345c07ba83914c&"; // Replace with your default profile picture URL
+        const profilePictureUrl = "https://cdn.discordapp.com/attachments/716426929074602054/1192906229652144138/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.png?ex=65aac780&is=65985280&hm=30d9e1ebc03178695fc986bea05f75c74a878d0dff758e7df4f1b09b7abb1a74&"; // Replace with your default profile picture URL
         const userIdrandom = generateRandomId();
         await firebase.firestore().collection("users").doc(userId).set({
             uid: userId,
@@ -223,6 +242,9 @@ document.getElementById("signup").addEventListener("submit", async function (eve
             Followers: 0,
             profileUserId: userIdrandom,
             verified: false,
+            biotext: "Sorry you don't have a bio yet.",
+            balance: 0,
+            isBanned: false,
             // test: userIdrandom
             // Add other user data as needed
         });
@@ -241,3 +263,14 @@ function generateRandomId() {
     return randomId;
   }
 
+
+
+
+  var modal = document.getElementById('id01');
+  var modal = document.getElementById('id02');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
